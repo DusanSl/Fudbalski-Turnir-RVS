@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SlojPodataka.TehnoloskeKlase
 {
-    internal class ZapisnikRepozitorijuma
+    internal class ZapisnikRepozitorijum
     {
     }
 }

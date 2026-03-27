@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace PrezentacioniSloj.Kontroler
+namespace PrezentacioniSloj.PrezentacionaLogika.Kontroler
 {
     public class NalogController : Controller
     {
