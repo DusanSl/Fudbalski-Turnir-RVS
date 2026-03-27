@@ -1,6 +1,6 @@
 <Solution>
-  <Project Path="PrezentacioniSloj/PrezentacioniSloj.csproj" />
-  <Project Path="SlojPodataka/SlojPodataka/SlojPodataka.csproj" />
-  <Project Path="SlojPoslovneLogike/SlojPoslovneLogike.csproj" />
-  <Project Path="SlojServisa/SlojServisa.csproj" />
+  <Project Path="izvorni kod/PrezentacioniSloj/PrezentacioniSloj.csproj" />
+  <Project Path="izvorni kod/SlojPodataka/SlojPodataka/SlojPodataka.csproj" />
+  <Project Path="izvorni kod/SlojPoslovneLogike/SlojPoslovneLogike.csproj" />
+  <Project Path="izvorni kod/SlojServisa/SlojServisa.csproj" />
 </Solution>
