@@ -1,4 +1,4 @@
-﻿namespace PrezentacioniSloj.ViewModels
+﻿namespace PrezentacioniSloj.PrezentacionaLogika.ViewModels
 {
     public class PrijavaViewModel
     {

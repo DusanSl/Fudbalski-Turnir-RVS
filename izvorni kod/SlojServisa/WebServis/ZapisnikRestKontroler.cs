@@ -1,6 +1,6 @@
 ﻿namespace SlojServisa.WebServis
 {
-    public class ZapisnikRestController
+    public class ZapisnikRestKontroler
     {
     }
 }
