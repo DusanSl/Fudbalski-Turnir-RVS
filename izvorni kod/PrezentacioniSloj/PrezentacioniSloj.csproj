@@ -1,17 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net10.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Content Remove="KorisnickiInterfejs\Pogledi\Nalog\Prijava.cshtml" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.5" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.5" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Include="KorisnickiInterfejs\Pogledi\Nalog\Prijava.cshtml" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\SlojPodataka\SlojPodataka\SlojPodataka.csproj" />
+		<ProjectReference Include="..\SlojPoslovneLogike\SlojPoslovneLogike.csproj" />
+		<ProjectReference Include="..\SlojServisa\SlojServisa.csproj" />
+	</ItemGroup>
 
 </Project>
