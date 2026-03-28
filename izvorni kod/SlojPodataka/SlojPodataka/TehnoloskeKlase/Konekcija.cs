@@ -4,7 +4,9 @@ using System.Text;
 
 namespace SlojPodataka.TehnoloskeKlase
 {
-    internal class Konekcija
+    public static class Konekcija
     {
+        public static string NizKonekcije { get; set; } =
+            "Server=localhost;Database=FudbalskiTurnirDB;Trusted_Connection=True;TrustServerCertificate=True;";
     }
 }
