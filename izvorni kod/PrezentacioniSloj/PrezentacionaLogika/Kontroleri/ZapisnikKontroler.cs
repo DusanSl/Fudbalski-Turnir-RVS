@@ -2,7 +2,7 @@
 
 namespace PrezentacioniSloj.PrezentacionaLogika.Kontroler
 {
-    public class ZapisnikController : Controller
+    public class ZapisnikKontroler : Controller
     {
         public IActionResult Index()
         {

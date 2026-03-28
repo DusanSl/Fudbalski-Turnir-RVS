@@ -2,7 +2,7 @@
 
 namespace PrezentacioniSloj.PrezentacionaLogika.Kontroler
 {
-    public class NalogController : Controller
+    public class NalogKontroler : Controller
     {
         public IActionResult Index()
         {
