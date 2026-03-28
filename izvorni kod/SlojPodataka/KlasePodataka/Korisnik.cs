@@ -10,7 +10,6 @@ namespace SlojPodataka.KlasePodataka
     {
         [Key]
         public int KorisnikID { get; set; }
-        public string ImePrezime { get; set; } = string.Empty;
         public string KorisnickoIme { get; set; } = string.Empty;
         public string Lozinka { get; set; } = string.Empty;
     }

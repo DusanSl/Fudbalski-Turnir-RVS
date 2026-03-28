@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SlojPodataka\SlojPodataka\SlojPodataka.csproj" />
+    <ProjectReference Include="..\SlojPodataka\SlojPodataka.csproj" />
   </ItemGroup>
 
 </Project>
