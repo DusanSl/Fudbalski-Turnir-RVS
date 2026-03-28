@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SlojPodataka\SlojPodataka\SlojPodataka.csproj" />
+    <ProjectReference Include="..\SlojPodataka\SlojPodataka.csproj" />
     <ProjectReference Include="..\SlojPoslovneLogike\SlojPoslovneLogike.csproj" />
   </ItemGroup>
 
