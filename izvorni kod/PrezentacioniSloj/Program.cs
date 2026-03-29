@@ -3,7 +3,13 @@ using SlojPodataka.TehnoloskeKlase;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddRazorOptions(opcije =>
+    {
+        opcije.ViewLocationFormats.Clear();
+        opcije.ViewLocationFormats.Add("/KorisnickiInterfejs/Views/{1}/{0}.cshtml");
+        opcije.ViewLocationFormats.Add("/KorisnickiInterfejs/Views/Shared/{0}.cshtml");
+    });
 
 builder.Services.AddDbContext<TurnirDbContext>(options =>
     options.UseSqlServer(builder.Configuration
@@ -25,7 +31,6 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 app.UseSession();

@@ -4,11 +4,11 @@ using SlojPodataka.TehnoloskeKlase;
 
 namespace PrezentacioniSloj.PrezentacionaLogika.Kontroleri
 {
-    public class NalogKontroler : Controller
+    public class NalogController : Controller
     {
         private readonly TurnirDbContext _kontekst;
 
-        public NalogKontroler(TurnirDbContext kontekst)
+        public NalogController(TurnirDbContext kontekst)
         {
             _kontekst = kontekst;
         }

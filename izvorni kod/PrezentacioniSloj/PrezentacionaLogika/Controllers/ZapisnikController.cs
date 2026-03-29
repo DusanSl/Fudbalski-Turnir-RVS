@@ -8,11 +8,11 @@ using System.Text.Json;
 
 namespace PrezentacioniSloj.PrezentacionaLogika.Kontroleri
 {
-    public class ZapisnikKontroler : Controller
+    public class ZapisnikController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public ZapisnikKontroler(IHttpClientFactory httpClientFactory)
+        public ZapisnikController(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
