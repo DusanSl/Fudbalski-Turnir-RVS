@@ -1,1 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8" ?> 
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Pravila>
+	<MinimalniRazmakMinuta>1</MinimalniRazmakMinuta>
+	<MaksimalniMinutGola>90</MaksimalniMinutGola>
+	<MinimalniMinutGola>1</MinimalniMinutGola>
+</Pravila>
