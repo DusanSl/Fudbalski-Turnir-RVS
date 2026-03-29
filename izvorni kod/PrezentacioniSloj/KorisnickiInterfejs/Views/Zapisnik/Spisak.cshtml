@@ -1,0 +1,79 @@
+﻿@model PrezentacioniSloj.PrezentacionaLogika.ViewModels.ZapisnikViewModel
+@{
+    ViewData["Title"] = "Spisak zapisnika";
+    var zapisnici = ViewBag.Zapisnici as List<SlojServisa.DTO.ZapisnikDTO> ?? new List<SlojServisa.DTO.ZapisnikDTO>();
+}
+
+<h2 class="mb-4">Spisak zapisnika</h2>
+
+<form asp-action="Spisak" method="get" class="mb-4">
+    <div class="row g-3">
+        <div class="col-md-3">
+            <label class="form-label">Datum od</label>
+            <input type="date" name="DatumOd" value="@Model.DatumOd?.ToString("yyyy-MM-dd")" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <label class="form-label">Datum do</label>
+            <input type="date" name="DatumDo" value="@Model.DatumDo?.ToString("yyyy-MM-dd")" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <label class="form-label">Klub</label>
+            <select name="FilterKlubId" class="form-select">
+                <option value="">-- Svi klubovi --</option>
+                @foreach (var klub in Model.Klubovi)
+                {
+                    <option value="@klub.Value" selected="@(klub.Selected)">@klub.Text</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-3 d-flex align-items-end gap-2">
+            <button type="submit" class="btn btn-primary">Filtriraj</button>
+            <a asp-action="Spisak" class="btn btn-secondary">Poništi</a>
+            <a asp-action="Stampa" class="btn btn-outline-secondary">Štampa</a>
+        </div>
+    </div>
+</form>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Datum</th>
+                <th>Teren</th>
+                <th>Domaćin</th>
+                <th>Gost</th>
+                <th>Rezultat</th>
+                <th>Akcije</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (!zapisnici.Any())
+            {
+                <tr>
+                    <td colspan="6" class="text-center">Nema zapisnika.</td>
+                </tr>
+            }
+            @foreach (var z in zapisnici)
+            {
+                <tr>
+                    <td>@z.DatumUtakmice.ToString("dd.MM.yyyy")</td>
+                    <td>@z.TerenNaziv, @z.TerenGrad</td>
+                    <td>@z.NazivDomacina</td>
+                    <td>@z.NazivGosta</td>
+                    <td class="fw-bold">@z.KonacanRezultatDomacin : @z.KonacanRezultatGost</td>
+                    <td>
+                        <a asp-action="Detalji" asp-route-id="@z.ZapisnikID" class="btn btn-sm btn-info">Detalji</a>
+                        <a asp-action="Izmena" asp-route-id="@z.ZapisnikID" class="btn btn-sm btn-warning">Izmena</a>
+                        <form asp-action="Obrisi" asp-route-id="@z.ZapisnikID" method="post" class="d-inline"
+                              onsubmit="return confirm('Da li ste sigurni da želite da obrišete ovaj zapisnik?')">
+                            <button type="submit" class="btn btn-sm btn-danger">Obriši</button>
+                        </form>
+                        <a asp-action="Stampa" asp-route-id="@z.ZapisnikID" class="btn btn-sm btn-outline-secondary">Štampa</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<a asp-action="Unos" class="btn btn-success mt-2">+ Novi zapisnik</a>

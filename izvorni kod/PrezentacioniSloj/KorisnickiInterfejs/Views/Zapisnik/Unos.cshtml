@@ -1,0 +1,165 @@
+﻿@model PrezentacioniSloj.PrezentacionaLogika.ViewModels.ZapisnikViewModel
+@{
+    ViewData["Title"] = "Unos zapisnika";
+}
+
+<h2 class="mb-4">Novi zapisnik</h2>
+
+<form asp-action="Unos" method="post" id="forma-zapisnik">
+    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+    <div class="card mb-4">
+        <div class="card-header bg-dark text-white">Podaci o utakmici</div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <label asp-for="DatumUtakmice" class="form-label">Datum utakmice</label>
+                    <input asp-for="DatumUtakmice" type="date" class="form-control" />
+                    <span asp-validation-for="DatumUtakmice" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="TerenNaziv" class="form-label">Naziv terena</label>
+                    <input asp-for="TerenNaziv" class="form-control" />
+                    <span asp-validation-for="TerenNaziv" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="TerenGrad" class="form-label">Grad terena</label>
+                    <input asp-for="TerenGrad" class="form-control" />
+                    <span asp-validation-for="TerenGrad" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="TerenAdresa" class="form-label">Adresa terena</label>
+                    <input asp-for="TerenAdresa" class="form-control" />
+                    <span asp-validation-for="TerenAdresa" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="DomacinID" class="form-label">Domaćin</label>
+                    <select asp-for="DomacinID" class="form-select" id="domacin-select">
+                        <option value="">-- Izaberi domaćina --</option>
+                        @foreach (var klub in Model.Klubovi)
+                        {
+                            <option value="@klub.Value">@klub.Text</option>
+                        }
+                    </select>
+                    <span asp-validation-for="DomacinID" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="GostID" class="form-label">Gost</label>
+                    <select asp-for="GostID" class="form-select" id="gost-select">
+                        <option value="">-- Izaberi gosta --</option>
+                        @foreach (var klub in Model.Klubovi)
+                        {
+                            <option value="@klub.Value">@klub.Text</option>
+                        }
+                    </select>
+                    <span asp-validation-for="GostID" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+            <span>Golovi</span>
+            <button type="button" class="btn btn-sm btn-success" id="dugme-dodaj-stavku">+ Dodaj gol</button>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered" id="tabela-stavki">
+                <thead class="table-secondary">
+                    <tr>
+                        <th>Minut gola</th>
+                        <th>Ime strelca</th>
+                        <th>Tim</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="telo-tabele">
+                    @for (int i = 0; i < Model.Stavke.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                <input name="Stavke[@i].MinutGola" type="number" min="1" max="90"
+                                       value="@Model.Stavke[i].MinutGola" class="form-control minut-gola" />
+                            </td>
+                            <td>
+                                <input name="Stavke[@i].ImeStrelca" type="text"
+                                       value="@Model.Stavke[i].ImeStrelca" class="form-control" />
+                            </td>
+                            <td>
+                                <select name="Stavke[@i].TimID" class="form-select">
+                                    <option value="">-- Tim --</option>
+                                    @foreach (var klub in Model.Klubovi)
+                                    {
+                                        <option value="@klub.Value"
+                                                selected="@(klub.Value == Model.Stavke[i].TimID.ToString())">
+                                            @klub.Text
+                                        </option>
+                                    }
+                                </select>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-danger dugme-obrisi-stavku">Ukloni</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div id="poruka-validacije" class="text-danger"></div>
+        </div>
+    </div>
+
+    <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary">Sačuvaj</button>
+        <a asp-action="Spisak" class="btn btn-secondary">Odustani</a>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        var brojStavki = @Model.Stavke.Count;
+        var klubovi = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(
+                    Model.Klubovi.Select(k => new { vrednost = k.Value, tekst = k.Text })));
+
+        document.getElementById("dugme-dodaj-stavku").addEventListener("click", function () {
+            var telo = document.getElementById("telo-tabele");
+            var red = document.createElement("tr");
+            red.innerHTML = `
+                <td>
+                    <input name="Stavke[${brojStavki}].MinutGola" type="number" min="1" max="90"
+                           class="form-control minut-gola" />
+                </td>
+                <td>
+                    <input name="Stavke[${brojStavki}].ImeStrelca" type="text" class="form-control" />
+                </td>
+                <td>
+                    <select name="Stavke[${brojStavki}].TimID" class="form-select">
+                        <option value="">-- Tim --</option>
+                        ${klubovi.map(k => `<option value="${k.vrednost}">${k.tekst}</option>`).join('')}
+                    </select>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-sm btn-danger dugme-obrisi-stavku">Ukloni</button>
+                </td>`;
+            telo.appendChild(red);
+            brojStavki++;
+            azurirajIndekse();
+        });
+
+        document.getElementById("telo-tabele").addEventListener("click", function (e) {
+            if (e.target.classList.contains("dugme-obrisi-stavku")) {
+                e.target.closest("tr").remove();
+                azurirajIndekse();
+            }
+        });
+
+        function azurirajIndekse() {
+            var redovi = document.querySelectorAll("#telo-tabele tr");
+            redovi.forEach(function (red, i) {
+                red.querySelectorAll("input, select").forEach(function (el) {
+                    el.name = el.name.replace(/\[\d+\]/, `[${i}]`);
+                });
+            });
+            brojStavki = redovi.length;
+        }
+    </script>
+}
