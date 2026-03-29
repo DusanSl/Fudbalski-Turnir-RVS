@@ -14,6 +14,9 @@ builder.Services.AddHttpClient("FudbalskiApi", client =>
     client.BaseAddress = new Uri("https://localhost:7193/");
 });
 
+builder.Services.AddSession();
+builder.Services.AddHttpContextAccessor();
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
@@ -25,6 +28,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+app.UseSession();
 app.UseAuthorization();
 
 app.MapControllerRoute(
