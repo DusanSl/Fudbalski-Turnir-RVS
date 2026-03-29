@@ -1,2 +1,84 @@
-﻿@{
+﻿@model SlojServisa.DTO.ZapisnikDTO
+@{
+    ViewData["Title"] = "Detalji zapisnika";
 }
+
+<h2 class="mb-4">Detalji zapisnika</h2>
+
+<div class="card mb-4">
+    <div class="card-header bg-dark text-white">Podaci o utakmici</div>
+    <div class="card-body">
+        <div class="row g-3">
+            <div class="col-md-4">
+                <label class="form-label fw-bold">Datum utakmice</label>
+                <p>@Model.DatumUtakmice.ToString("dd.MM.yyyy")</p>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label fw-bold">Naziv terena</label>
+                <p>@Model.TerenNaziv</p>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label fw-bold">Grad terena</label>
+                <p>@Model.TerenGrad</p>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label fw-bold">Adresa terena</label>
+                <p>@Model.TerenAdresa</p>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label fw-bold">Domaćin</label>
+                <p>@Model.NazivDomacina</p>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label fw-bold">Gost</label>
+                <p>@Model.NazivGosta</p>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label fw-bold">Rezultat</label>
+                <p class="fw-bold fs-4">@Model.KonacanRezultatDomacin : @Model.KonacanRezultatGost</p>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label fw-bold">Datum kreiranja</label>
+                <p>@Model.DatumKreiranja.ToString("dd.MM.yyyy HH:mm")</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header bg-dark text-white">Golovi</div>
+    <div class="card-body">
+        @if (!Model.Stavke.Any())
+        {
+            <p class="text-muted">Nema unetih golova.</p>
+        }
+        else
+        {
+            <table class="table table-bordered table-striped">
+                <thead class="table-secondary">
+                    <tr>
+                        <th>Minut</th>
+                        <th>Strelac</th>
+                        <th>Tim</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var stavka in Model.Stavke.OrderBy(s => s.MinutGola))
+                    {
+                        <tr>
+                            <td>@stavka.MinutGola'</td>
+                            <td>@stavka.ImeStrelca</td>
+                            <td>@stavka.NazivTima</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
+
+<div class="d-flex gap-2">
+    <a asp-action="Izmena" asp-route-id="@Model.ZapisnikID" class="btn btn-warning">Izmena</a>
+    <a asp-action="Stampa" asp-route-id="@Model.ZapisnikID" class="btn btn-outline-secondary">Štampa</a>
+    <a asp-action="Spisak" class="btn btn-secondary">Nazad</a>
+</div>

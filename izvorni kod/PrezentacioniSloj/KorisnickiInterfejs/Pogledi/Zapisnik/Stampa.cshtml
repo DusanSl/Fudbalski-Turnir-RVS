@@ -1,2 +1,151 @@
-﻿@{
+﻿@model List<SlojServisa.DTO.ZapisnikDTO>
+@{
+    ViewData["Title"] = "Štampa";
+    bool jedanZapisnik = ViewBag.JedanZapisnik ?? false;
+}
+
+<div id="oblast-stampe">
+    @if (jedanZapisnik && Model.Count == 1)
+    {
+        var z = Model.First();
+        <div class="card mb-4">
+            <div class="card-header bg-dark text-white text-center">
+                <h4>Zapisnik o odigranoj fudbalskoj utakmici</h4>
+                <p class="mb-0">Broj: @z.ZapisnikID | Datum: @z.DatumUtakmice.ToString("dd.MM.yyyy")</p>
+            </div>
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h5>Podaci o utakmici</h5>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td class="fw-bold">Teren</td>
+                                <td>@z.TerenNaziv</td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold">Grad</td>
+                                <td>@z.TerenGrad</td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold">Adresa</td>
+                                <td>@z.TerenAdresa</td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold">Datum</td>
+                                <td>@z.DatumUtakmice.ToString("dd.MM.yyyy")</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Timovi</h5>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td class="fw-bold">Domaćin</td>
+                                <td>@z.NazivDomacina</td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold">Gost</td>
+                                <td>@z.NazivGosta</td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold">Rezultat</td>
+                                <td class="fw-bold fs-5">@z.KonacanRezultatDomacin : @z.KonacanRezultatGost</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <h5>Lista golova</h5>
+                @if (!z.Stavke.Any())
+                {
+                    <p class="text-muted">Nema unetih golova.</p>
+                }
+                else
+                {
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Minut</th>
+                                <th>Strelac</th>
+                                <th>Tim</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int br = 1;
+                            }
+                            @foreach (var s in z.Stavke.OrderBy(s => s.MinutGola))
+                            {
+                                <tr>
+                                    <td>@br</td>
+                                    <td>@s.MinutGola'</td>
+                                    <td>@s.ImeStrelca</td>
+                                    <td>@s.NazivTima</td>
+                                </tr>
+                                br++;
+                            }
+                        </tbody>
+                    </table>
+                }
+
+                <div class="mt-4 text-end">
+                    <p>Datum kreiranja: @z.DatumKreiranja.ToString("dd.MM.yyyy HH:mm")</p>
+                    <p>_______________________</p>
+                    <p>Potpis</p>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h3 class="mb-4 text-center">Spisak zapisnika</h3>
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Datum</th>
+                    <th>Teren</th>
+                    <th>Domaćin</th>
+                    <th>Gost</th>
+                    <th>Rezultat</th>
+                    <th>Broj golova</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int rbr = 1;
+                }
+                @foreach (var z in Model)
+                {
+                    <tr>
+                        <td>@rbr</td>
+                        <td>@z.DatumUtakmice.ToString("dd.MM.yyyy")</td>
+                        <td>@z.TerenNaziv, @z.TerenGrad</td>
+                        <td>@z.NazivDomacina</td>
+                        <td>@z.NazivGosta</td>
+                        <td class="fw-bold">@z.KonacanRezultatDomacin : @z.KonacanRezultatGost</td>
+                        <td>@z.Stavke.Count</td>
+                    </tr>
+                    rbr++;
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+<div class="d-flex gap-2 mt-3 d-print-none">
+    <button onclick="window.print()" class="btn btn-primary">Štampaj</button>
+    <a asp-action="Spisak" class="btn btn-secondary">Nazad</a>
+</div>
+
+@section Scripts {
+    <style>
+        @@media 
+        print {
+            .d-print-none { display: none !important; }
+        header, footer, nav { display: none !important; }
+            #oblast-stampe { width: 100%; }
+        }
+    </style>
 }
