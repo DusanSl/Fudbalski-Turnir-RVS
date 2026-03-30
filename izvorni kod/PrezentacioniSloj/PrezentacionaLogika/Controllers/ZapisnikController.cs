@@ -103,7 +103,7 @@ namespace PrezentacioniSloj.PrezentacionaLogika.Kontroleri
             {
                 DatumUtakmice = model.DatumUtakmice,
                 TerenNaziv = model.TerenNaziv,
-                TerenGrad = model.TerenGrad,
+                TerenMesto = model.TerenMesto,
                 TerenAdresa = model.TerenAdresa,
                 DomacinID = model.DomacinID,
                 GostID = model.GostID,
@@ -111,7 +111,7 @@ namespace PrezentacioniSloj.PrezentacionaLogika.Kontroleri
                 {
                     MinutGola = s.MinutGola,
                     ImeStrelca = s.ImeStrelca,
-                    TimID = s.TimID
+                    KlubID = s.KlubID
                 }).ToList()
             };
 
@@ -170,7 +170,7 @@ namespace PrezentacioniSloj.PrezentacionaLogika.Kontroleri
                 ZapisnikID = dto!.ZapisnikID,
                 DatumUtakmice = dto.DatumUtakmice,
                 TerenNaziv = dto.TerenNaziv,
-                TerenGrad = dto.TerenGrad,
+                TerenMesto = dto.TerenMesto,
                 TerenAdresa = dto.TerenAdresa,
                 DomacinID = dto.DomacinID,
                 GostID = dto.GostID,
@@ -182,8 +182,8 @@ namespace PrezentacioniSloj.PrezentacionaLogika.Kontroleri
                     StavkaID = s.StavkaID,
                     MinutGola = s.MinutGola,
                     ImeStrelca = s.ImeStrelca,
-                    TimID = s.TimID,
-                    NazivTima = s.NazivTima
+                    KlubID = s.KlubID,
+                    NazivKluba = s.NazivKluba
                 }).ToList()
             };
 
@@ -208,7 +208,7 @@ namespace PrezentacioniSloj.PrezentacionaLogika.Kontroleri
                 ZapisnikID = id,
                 DatumUtakmice = model.DatumUtakmice,
                 TerenNaziv = model.TerenNaziv,
-                TerenGrad = model.TerenGrad,
+                TerenMesto = model.TerenMesto,
                 TerenAdresa = model.TerenAdresa,
                 DomacinID = model.DomacinID,
                 GostID = model.GostID,
@@ -217,7 +217,7 @@ namespace PrezentacioniSloj.PrezentacionaLogika.Kontroleri
                     StavkaID = s.StavkaID,
                     MinutGola = s.MinutGola,
                     ImeStrelca = s.ImeStrelca,
-                    TimID = s.TimID
+                    KlubID = s.KlubID
                 }).ToList()
             };
 

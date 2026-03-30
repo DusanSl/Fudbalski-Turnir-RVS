@@ -22,7 +22,7 @@ namespace SlojPodataka.TehnoloskeKlase
                 .Include(z => z.Domacin)
                 .Include(z => z.Gost)
                 .Include(z => z.Stavke)
-                    .ThenInclude(s => s.Tim)
+                    .ThenInclude(s => s.Klub)
                 .ToList();
         }
 
@@ -32,7 +32,7 @@ namespace SlojPodataka.TehnoloskeKlase
                 .Include(z => z.Domacin)
                 .Include(z => z.Gost)
                 .Include(z => z.Stavke)
-                    .ThenInclude(s => s.Tim)
+                    .ThenInclude(s => s.Klub)
                 .FirstOrDefault(z => z.ZapisnikID == id);
         }
 
@@ -65,7 +65,7 @@ namespace SlojPodataka.TehnoloskeKlase
 
                 postojeci.DatumUtakmice = zapisnik.DatumUtakmice;
                 postojeci.TerenNaziv = zapisnik.TerenNaziv;
-                postojeci.TerenGrad = zapisnik.TerenGrad;
+                postojeci.TerenMesto = zapisnik.TerenMesto;
                 postojeci.TerenAdresa = zapisnik.TerenAdresa;
                 postojeci.DomacinID = zapisnik.DomacinID;
                 postojeci.GostID = zapisnik.GostID;

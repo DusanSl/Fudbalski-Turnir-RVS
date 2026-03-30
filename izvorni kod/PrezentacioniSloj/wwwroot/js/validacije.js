@@ -35,7 +35,7 @@ function validirajFormu() {
     redovi.forEach(function (red, i) {
         var minut = red.querySelector('[name*="MinutGola"]');
         var imeStrelca = red.querySelector('[name*="ImeStrelca"]');
-        var timID = red.querySelector('[name*="TimID"]');
+        var klubID = red.querySelector('[name*="KlubID"]');
 
         if (imeStrelca && !regsImeStrelca.test(imeStrelca.value.trim()))
             greske.push(`Stavka ${i + 1}: Ime strelca nije ispravno (samo slova, min 2 karaktera).`);
@@ -52,8 +52,8 @@ function validirajFormu() {
             prethodniMinut = trenutniMinut;
         }
 
-        if (timID && timID.value === '')
-            greske.push(`Stavka ${i + 1}: Tim je obavezan.`);
+        if (KlubID && KlubID.value === '')
+            greske.push(`Stavka ${i + 1}: Klub je obavezan.`);
     });
 
     var poruka = document.getElementById('poruka-validacije');

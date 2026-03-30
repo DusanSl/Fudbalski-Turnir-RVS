@@ -24,7 +24,7 @@
                             </tr>
                             <tr>
                                 <td class="fw-bold">Grad</td>
-                                <td>@z.TerenGrad</td>
+                                <td>@z.TerenMesto</td>
                             </tr>
                             <tr>
                                 <td class="fw-bold">Adresa</td>
@@ -37,7 +37,7 @@
                         </table>
                     </div>
                     <div class="col-md-6">
-                        <h5>Timovi</h5>
+                        <h5>Klubovi</h5>
                         <table class="table table-bordered">
                             <tr>
                                 <td class="fw-bold">Domaćin</td>
@@ -68,7 +68,7 @@
                                 <th>#</th>
                                 <th>Minut</th>
                                 <th>Strelac</th>
-                                <th>Tim</th>
+                                <th>Klub</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -81,7 +81,7 @@
                                     <td>@br</td>
                                     <td>@s.MinutGola'</td>
                                     <td>@s.ImeStrelca</td>
-                                    <td>@s.NazivTima</td>
+                                    <td>@s.NazivKluba</td>
                                 </tr>
                                 br++;
                             }
@@ -121,7 +121,7 @@
                     <tr>
                         <td>@rbr</td>
                         <td>@z.DatumUtakmice.ToString("dd.MM.yyyy")</td>
-                        <td>@z.TerenNaziv, @z.TerenGrad</td>
+                        <td>@z.TerenNaziv, @z.TerenMesto</td>
                         <td>@z.NazivDomacina</td>
                         <td>@z.NazivGosta</td>
                         <td class="fw-bold">@z.KonacanRezultatDomacin : @z.KonacanRezultatGost</td>

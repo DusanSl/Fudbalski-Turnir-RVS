@@ -14,8 +14,8 @@ namespace PrezentacioniSloj.PrezentacionaLogika.ViewModels
         [StringLength(100, ErrorMessage = "Ime strelca ne može biti duže od 100 karaktera.")]
         public string ImeStrelca { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "Tim je obavezan.")]
-        public int TimID { get; set; }
-        public string NazivTima { get; set; } = string.Empty;
+        [Required(ErrorMessage = "Klub je obavezan.")]
+        public int KlubID { get; set; }
+        public string NazivKluba { get; set; } = string.Empty;
     }
 }

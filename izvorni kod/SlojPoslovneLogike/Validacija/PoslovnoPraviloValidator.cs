@@ -34,8 +34,8 @@ namespace SlojPoslovneLogike.Validacija
         }
         public (int RezultatDomacin, int RezultatGost) IzracunajRezultat( int domacinId, int gostId, List<SlojPodataka.KlasePodataka.StavkaZapisnika> stavke)
         {
-            int golDomacin = stavke.Count(s => s.TimID == domacinId);
-            int golGost = stavke.Count(s => s.TimID == gostId);
+            int golDomacin = stavke.Count(s => s.KlubID == domacinId);
+            int golGost = stavke.Count(s => s.KlubID == gostId);
             return (golDomacin, golGost);
         }
     }
