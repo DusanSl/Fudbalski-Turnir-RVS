@@ -46,6 +46,14 @@ namespace SlojServisa.Webservis
         [HttpPost]
         public ActionResult Dodaj([FromBody] ZapisnikDTO dto)
         {
+            var postojiZapisnik = _repozitorijum.DohvatiSve()
+                .Any(z => z.DomacinID == dto.DomacinID
+                       && z.GostID == dto.GostID
+                       && z.DatumUtakmice.Date == dto.DatumUtakmice.Date);
+
+            if (postojiZapisnik)
+                return BadRequest("Već postoji zapisnik za ovu utakmicu na isti datum.");
+
             var sortirane = dto.Stavke.OrderBy(s => s.MinutGola).ToList();
             var postojeciMinuti = new List<int>();
 
