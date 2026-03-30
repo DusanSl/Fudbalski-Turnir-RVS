@@ -34,6 +34,15 @@ namespace PrezentacioniSloj.PrezentacionaLogika.Kontroleri
                 return View(model);
             }
 
+            var postojiEmail = _kontekst.Korisnici
+                .Any(k => k.Email == model.Email);
+
+            if (postojiEmail)
+            {
+                ModelState.AddModelError("", "Email adresa je već u upotrebi.");
+                return View(model);
+            }
+
             var korisnik = new SlojPodataka.KlasePodataka.Korisnik
             {
                 KorisnickoIme = model.KorisnickoIme,
