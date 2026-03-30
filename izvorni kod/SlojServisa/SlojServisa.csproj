@@ -16,5 +16,11 @@
     <ProjectReference Include="..\SlojPodataka\SlojPodataka.csproj" />
     <ProjectReference Include="..\SlojPoslovneLogike\SlojPoslovneLogike.csproj" />
   </ItemGroup>
-
+  
+  <ItemGroup>
+	<Content Include="..\SlojPoslovneLogike\Ogranicenja\pravila_hronologije.xml">
+	 <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  <TargetPath>Ogranicenja\pravila_hronologije.xml</TargetPath>
+	</Content>
+  </ItemGroup>
 </Project>

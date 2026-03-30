@@ -14,6 +14,40 @@ namespace PrezentacioniSloj.PrezentacionaLogika.Kontroleri
         }
 
         [HttpGet]
+        public IActionResult Registracija()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Registracija(RegistracijaViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var postojiKorisnik = _kontekst.Korisnici
+                .Any(k => k.KorisnickoIme == model.KorisnickoIme);
+
+            if (postojiKorisnik)
+            {
+                ModelState.AddModelError("", "Korisničko ime već postoji.");
+                return View(model);
+            }
+
+            var korisnik = new SlojPodataka.KlasePodataka.Korisnik
+            {
+                KorisnickoIme = model.KorisnickoIme,
+                Lozinka = model.Lozinka
+            };
+
+            _kontekst.Korisnici.Add(korisnik);
+            _kontekst.SaveChanges();
+
+            HttpContext.Session.SetString("KorisnickoIme", korisnik.KorisnickoIme);
+            return RedirectToAction("Spisak", "Zapisnik");
+        }
+
+        [HttpGet]
         public IActionResult Prijava()
         {
             return View();
