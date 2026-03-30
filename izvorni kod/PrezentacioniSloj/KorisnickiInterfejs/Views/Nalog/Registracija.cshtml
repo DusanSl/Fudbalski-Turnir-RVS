@@ -17,6 +17,12 @@
             </div>
 
             <div class="mb-3">
+                <label asp-for="Email" class="form-label">Email</label>
+                <input asp-for="Email" class="form-control" placeholder="Unesite email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
                 <label asp-for="Lozinka" class="form-label">Lozinka</label>
                 <input asp-for="Lozinka" class="form-control" placeholder="Unesite lozinku" />
                 <span asp-validation-for="Lozinka" class="text-danger"></span>

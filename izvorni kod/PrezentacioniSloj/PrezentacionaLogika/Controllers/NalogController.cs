@@ -37,6 +37,7 @@ namespace PrezentacioniSloj.PrezentacionaLogika.Kontroleri
             var korisnik = new SlojPodataka.KlasePodataka.Korisnik
             {
                 KorisnickoIme = model.KorisnickoIme,
+                Email = model.Email,
                 Lozinka = model.Lozinka
             };
 
