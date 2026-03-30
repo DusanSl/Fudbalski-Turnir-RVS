@@ -5,7 +5,7 @@ function validirajFormu() {
     var greske = [];
 
     var terenNaziv = document.querySelector('[name="TerenNaziv"]');
-    var terenGrad = document.querySelector('[name="TerenGrad"]');
+    var terenMesto = document.querySelector('[name="TerenMesto"]');
     var terenAdresa = document.querySelector('[name="TerenAdresa"]');
     var domacinID = document.querySelector('[name="DomacinID"]');
     var gostID = document.querySelector('[name="GostID"]');
@@ -13,8 +13,8 @@ function validirajFormu() {
     if (terenNaziv && terenNaziv.value.trim() === '')
         greske.push('Naziv terena je obavezan.');
 
-    if (terenGrad && terenGrad.value.trim() === '')
-        greske.push('Grad terena je obavezan.');
+    if (terenMesto && terenMesto.value.trim() === '')
+        greske.push('Mesto terena je obavezan.');
 
     if (terenAdresa && terenAdresa.value.trim() === '')
         greske.push('Adresa terena je obavezna.');
