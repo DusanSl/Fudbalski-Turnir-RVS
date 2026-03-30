@@ -14,7 +14,7 @@
             <div class="row g-3">
                 <div class="col-md-4">
                     <label asp-for="DatumUtakmice" class="form-label">Datum utakmice</label>
-                    <input asp-for="DatumUtakmice" type="date" class="form-control" />
+                    <input asp-for="DatumUtakmice" type="datetime-local" class="form-control" />
                     <span asp-validation-for="DatumUtakmice" class="text-danger"></span>
                 </div>
                 <div class="col-md-4">
@@ -46,7 +46,7 @@
                 <div class="col-md-4">
                     <label asp-for="GostID" class="form-label">Gost</label>
                     <select asp-for="GostID" class="form-select" id="gost-select">
-                        <option value="">Izaberi gostujući klub-</option>
+                        <option value="">Izaberi gostujući klub</option>
                         @foreach (var klub in Model.Klubovi)
                         {
                             <option value="@klub.Value">@klub.Text</option>
