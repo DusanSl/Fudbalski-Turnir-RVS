@@ -22,7 +22,14 @@
                 <option value="">Svi klubovi</option>
                 @foreach (var klub in Model.Klubovi)
                 {
-                    <option value="@klub.Value" selected="@(klub.Selected)">@klub.Text</option>
+                    if (klub.Value == Model.FilterKlubId.ToString())
+                    {
+                        <option value="@klub.Value" selected>@klub.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@klub.Value">@klub.Text</option>
+                    }
                 }
             </select>
         </div>
