@@ -35,7 +35,7 @@
                 <div class="col-md-4">
                     <label asp-for="DomacinID" class="form-label">Domaćin</label>
                     <select asp-for="DomacinID" class="form-select" id="domacin-select">
-                        <option value="">-- Izaberi domaćina --</option>
+                        <option value="">Izaberi domaći klub</option>
                         @foreach (var klub in Model.Klubovi)
                         {
                             <option value="@klub.Value">@klub.Text</option>
@@ -46,7 +46,7 @@
                 <div class="col-md-4">
                     <label asp-for="GostID" class="form-label">Gost</label>
                     <select asp-for="GostID" class="form-select" id="gost-select">
-                        <option value="">-- Izaberi gosta --</option>
+                        <option value="">Izaberi gostujući klub-</option>
                         @foreach (var klub in Model.Klubovi)
                         {
                             <option value="@klub.Value">@klub.Text</option>
@@ -87,7 +87,7 @@
                             </td>
                             <td>
                                 <select name="Stavke[@i].KlubID" class="form-select">
-                                    <option value="">-- Klub --</option>
+                                    <option value="">Izaberite klub</option>
                                     @foreach (var klub in Model.Klubovi)
                                     {
                                         <option value="@klub.Value"
@@ -133,7 +133,7 @@
                 </td>
                 <td>
                     <select name="Stavke[${brojStavki}].KlubID" class="form-select">
-                        <option value="">-- Klub --</option>
+                        <option value="">Izaberite klub</option>
                         ${klubovi.map(k => `<option value="${k.vrednost}">${k.tekst}</option>`).join('')}
                     </select>
                 </td>
