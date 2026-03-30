@@ -1,1 +1,57 @@
-﻿<?xml version="1.0" encoding="utf-8" ?> 
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Klubovi>
+	<Klub>
+		<NazivKluba>FC Barcelona</NazivKluba>
+		<Grad>Barcelona</Grad>
+		<Stadion>Spotify Camp Nou</Stadion>
+		<Adresa>Carrer d'Aristides Maillol</Adresa>
+		<BrojIgraca>25</BrojIgraca>
+		<BrojOsvojenihTitula>27</BrojOsvojenihTitula>
+		<GodinaOsnivanja>1899</GodinaOsnivanja>
+	</Klub>
+	<Klub>
+		<NazivKluba>Real Madrid CF</NazivKluba>
+		<Grad>Madrid</Grad>
+		<Stadion>Santiago Bernabeu</Stadion>
+		<Adresa>Avenida de Concha Espina 1</Adresa>
+		<BrojIgraca>25</BrojIgraca>
+		<BrojOsvojenihTitula>35</BrojOsvojenihTitula>
+		<GodinaOsnivanja>1902</GodinaOsnivanja>
+	</Klub>
+	<Klub>
+		<NazivKluba>Manchester City FC</NazivKluba>
+		<Grad>Manchester</Grad>
+		<Stadion>Etihad Stadium</Stadion>
+		<Adresa>Etihad Campus</Adresa>
+		<BrojIgraca>24</BrojIgraca>
+		<BrojOsvojenihTitula>9</BrojOsvojenihTitula>
+		<GodinaOsnivanja>1880</GodinaOsnivanja>
+	</Klub>
+	<Klub>
+		<NazivKluba>Bayern Munich</NazivKluba>
+		<Grad>Minhen</Grad>
+		<Stadion>Allianz Arena</Stadion>
+		<Adresa>Werner-Heisenberg-Allee 25</Adresa>
+		<BrojIgraca>25</BrojIgraca>
+		<BrojOsvojenihTitula>32</BrojOsvojenihTitula>
+		<GodinaOsnivanja>1900</GodinaOsnivanja>
+	</Klub>
+	<Klub>
+		<NazivKluba>Paris Saint-Germain</NazivKluba>
+		<Grad>Pariz</Grad>
+		<Stadion>Parc des Princes</Stadion>
+		<Adresa>24 Rue du Commandant Guilbaud</Adresa>
+		<BrojIgraca>24</BrojIgraca>
+		<BrojOsvojenihTitula>11</BrojOsvojenihTitula>
+		<GodinaOsnivanja>1970</GodinaOsnivanja>
+	</Klub>
+	<Klub>
+		<NazivKluba>Juventus FC</NazivKluba>
+		<Grad>Torino</Grad>
+		<Stadion>Allianz Stadium</Stadion>
+		<Adresa>Via Druento 175</Adresa>
+		<BrojIgraca>23</BrojIgraca>
+		<BrojOsvojenihTitula>36</BrojOsvojenihTitula>
+		<GodinaOsnivanja>1897</GodinaOsnivanja>
+	</Klub>
+</Klubovi>
