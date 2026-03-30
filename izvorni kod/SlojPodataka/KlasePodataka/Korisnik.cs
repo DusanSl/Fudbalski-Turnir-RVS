@@ -11,6 +11,7 @@ namespace SlojPodataka.KlasePodataka
         [Key]
         public int KorisnikID { get; set; }
         public string KorisnickoIme { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
         public string Lozinka { get; set; } = string.Empty;
     }
 }

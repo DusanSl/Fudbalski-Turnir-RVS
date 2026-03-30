@@ -14,9 +14,9 @@ namespace PrezentacioniSloj.PrezentacionaLogika.ViewModels
         [StringLength(100, ErrorMessage = "Naziv terena ne može biti duži od 100 karaktera.")]
         public string TerenNaziv { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "Grad terena je obavezan.")]
-        [StringLength(100, ErrorMessage = "Naziv grada ne može biti duži od 100 karaktera.")]
-        public string TerenGrad { get; set; } = string.Empty;
+        [Required(ErrorMessage = "Mesto terena je obavezno.")]
+        [StringLength(100, ErrorMessage = "Naziv mesta ne može biti duži od 100 karaktera.")]
+        public string TerenMesto { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Adresa terena je obavezna.")]
         [StringLength(200, ErrorMessage = "Adresa ne može biti duža od 200 karaktera.")]

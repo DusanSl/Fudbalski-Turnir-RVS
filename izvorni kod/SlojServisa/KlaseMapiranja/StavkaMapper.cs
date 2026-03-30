@@ -13,8 +13,8 @@ namespace SlojServisa.KlaseMapiranja
                 ZapisnikID = stavka.ZapisnikID,
                 MinutGola = stavka.MinutGola,
                 ImeStrelca = stavka.ImeStrelca,
-                TimID = stavka.TimID,
-                NazivTima = stavka.Tim?.NazivKluba ?? string.Empty
+                KlubID = stavka.KlubID,
+                NazivKluba = stavka.Klub?.NazivKluba ?? string.Empty
             };
         }
 
@@ -26,7 +26,7 @@ namespace SlojServisa.KlaseMapiranja
                 ZapisnikID = dto.ZapisnikID,
                 MinutGola = dto.MinutGola,
                 ImeStrelca = dto.ImeStrelca,
-                TimID = dto.TimID
+                KlubID = dto.KlubID
             };
         }
     }

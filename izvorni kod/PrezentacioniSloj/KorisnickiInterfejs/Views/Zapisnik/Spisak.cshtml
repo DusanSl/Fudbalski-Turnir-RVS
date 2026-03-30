@@ -19,10 +19,17 @@
         <div class="col-md-3">
             <label class="form-label">Klub</label>
             <select name="FilterKlubId" class="form-select">
-                <option value="">-- Svi klubovi --</option>
+                <option value="">Svi klubovi</option>
                 @foreach (var klub in Model.Klubovi)
                 {
-                    <option value="@klub.Value" selected="@(klub.Selected)">@klub.Text</option>
+                    if (klub.Value == Model.FilterKlubId.ToString())
+                    {
+                        <option value="@klub.Value" selected>@klub.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@klub.Value">@klub.Text</option>
+                    }
                 }
             </select>
         </div>
@@ -57,7 +64,7 @@
             {
                 <tr>
                     <td>@z.DatumUtakmice.ToString("dd.MM.yyyy")</td>
-                    <td>@z.TerenNaziv, @z.TerenGrad</td>
+                    <td>@z.TerenNaziv, @z.TerenMesto</td>
                     <td>@z.NazivDomacina</td>
                     <td>@z.NazivGosta</td>
                     <td class="fw-bold">@z.KonacanRezultatDomacin : @z.KonacanRezultatGost</td>
@@ -76,4 +83,4 @@
     </table>
 </div>
 
-<a asp-action="Unos" class="btn btn-success mt-2">+ Novi zapisnik</a>
+<a asp-action="Unos" class="btn btn-success mt-2">Novi zapisnik</a>

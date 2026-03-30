@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SlojPodataka.TehnoloskeKlase;
 
@@ -11,9 +12,11 @@ using SlojPodataka.TehnoloskeKlase;
 namespace SlojPodataka.Migrations
 {
     [DbContext(typeof(TurnirDbContext))]
-    partial class TurnirDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260330123702_PreimenovanjeKolona")]
+    partial class PreimenovanjeKolona
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,10 +70,6 @@ namespace SlojPodataka.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("KorisnikID"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("KorisnickoIme")
                         .IsRequired()

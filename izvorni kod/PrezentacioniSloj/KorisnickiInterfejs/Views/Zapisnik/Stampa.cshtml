@@ -8,93 +8,75 @@
     @if (jedanZapisnik && Model.Count == 1)
     {
         var z = Model.First();
-        <div class="card mb-4">
-            <div class="card-header bg-dark text-white text-center">
-                <h4>Zapisnik o odigranoj fudbalskoj utakmici</h4>
-                <p class="mb-0">Broj: @z.ZapisnikID | Datum: @z.DatumUtakmice.ToString("dd.MM.yyyy")</p>
-            </div>
-            <div class="card-body">
-                <div class="row mb-4">
-                    <div class="col-md-6">
-                        <h5>Podaci o utakmici</h5>
-                        <table class="table table-bordered">
-                            <tr>
-                                <td class="fw-bold">Teren</td>
-                                <td>@z.TerenNaziv</td>
-                            </tr>
-                            <tr>
-                                <td class="fw-bold">Grad</td>
-                                <td>@z.TerenGrad</td>
-                            </tr>
-                            <tr>
-                                <td class="fw-bold">Adresa</td>
-                                <td>@z.TerenAdresa</td>
-                            </tr>
-                            <tr>
-                                <td class="fw-bold">Datum</td>
-                                <td>@z.DatumUtakmice.ToString("dd.MM.yyyy")</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="col-md-6">
-                        <h5>Timovi</h5>
-                        <table class="table table-bordered">
-                            <tr>
-                                <td class="fw-bold">Domaćin</td>
-                                <td>@z.NazivDomacina</td>
-                            </tr>
-                            <tr>
-                                <td class="fw-bold">Gost</td>
-                                <td>@z.NazivGosta</td>
-                            </tr>
-                            <tr>
-                                <td class="fw-bold">Rezultat</td>
-                                <td class="fw-bold fs-5">@z.KonacanRezultatDomacin : @z.KonacanRezultatGost</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
+        <div class="p-4">
+            <h5 class="fw-bold text-uppercase">Zapisnik o odigranoj fudbalskoj utakmici (Br. @z.ZapisnikID)</h5>
+            <hr />
 
-                <h5>Lista golova</h5>
-                @if (!z.Stavke.Any())
-                {
-                    <p class="text-muted">Nema unetih golova.</p>
-                }
-                else
-                {
-                    <table class="table table-bordered table-striped">
-                        <thead class="table-dark">
-                            <tr>
-                                <th>#</th>
-                                <th>Minut</th>
-                                <th>Strelac</th>
-                                <th>Tim</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @{
-                                int br = 1;
-                            }
-                            @foreach (var s in z.Stavke.OrderBy(s => s.MinutGola))
-                            {
-                                <tr>
-                                    <td>@br</td>
-                                    <td>@s.MinutGola'</td>
-                                    <td>@s.ImeStrelca</td>
-                                    <td>@s.NazivTima</td>
-                                </tr>
-                                br++;
-                            }
-                        </tbody>
-                    </table>
-                }
+            <h6 class="fw-bold text-uppercase mt-3">Podaci o lokaciji i terminu</h6>
+            <table class="table table-borderless mb-0">
+                <tr>
+                    <td class="fw-bold p-1" style="width:180px">Teren/Stadion:</td>
+                    <td class="p-1">@z.TerenNaziv</td>
+                </tr>
+                <tr>
+                    <td class="fw-bold p-1">Mesto:</td>
+                    <td class="p-1">@z.TerenMesto</td>
+                </tr>
+                <tr>
+                    <td class="fw-bold p-1">Adresa:</td>
+                    <td class="p-1">@z.TerenAdresa</td>
+                </tr>
+                <tr>
+                    <td class="fw-bold p-1">Datum i vreme:</td>
+                    <td class="p-1">@z.DatumUtakmice.ToString("dd/MM/yyyy") u @z.DatumUtakmice.ToString("HH:mm") časova</td>
+                </tr>
+            </table>
 
-                <div class="mt-4 text-end">
-                    <p>Datum kreiranja: @z.DatumKreiranja.ToString("dd.MM.yyyy HH:mm")</p>
-                    <p>_______________________</p>
-                    <p>Potpis</p>
-                </div>
-            </div>
+            <hr />
+            <h6 class="fw-bold text-uppercase mt-3">Podaci o klubovima</h6>
+            <p class="mb-1">
+                <span class="fw-bold">DOMAĆIN:</span> @z.NazivDomacina
+                <span class="ms-3 fw-bold">GOST:</span> @z.NazivGosta
+            </p>
+            <p class="mb-1">
+                <span class="fw-bold">KONAČAN REZULTAT:</span> [ @z.KonacanRezultatDomacin ] : [ @z.KonacanRezultatGost ]
+            </p>
+
+            <hr />
+            <h6 class="fw-bold text-uppercase mt-3">Spisak postignutih golova</h6>
+            @if (!z.Stavke.Any())
+            {
+                <p class="text-muted">Nema unetih golova.</p>
+            }
+            else
+            {
+                <table class="table table-bordered mt-2">
+                    <thead>
+                        <tr>
+                            <th>Redni broj</th>
+                            <th>Minut gola</th>
+                            <th>Ime i prezime strelca</th>
+                            <th>Klub (Domaćin/Gost)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int br = 1;
+                        }
+                        @foreach (var s in z.Stavke.OrderBy(s => s.MinutGola))
+                        {
+                            <tr>
+                                <td>@br.</td>
+                                <td>@s.MinutGola'</td>
+                                <td>@s.ImeStrelca</td>
+                                <td>@s.NazivKluba</td>
+                            </tr>
+                            br++;
+                        }
+                    </tbody>
+                </table>
+            }
+
         </div>
     }
     else
@@ -121,7 +103,7 @@
                     <tr>
                         <td>@rbr</td>
                         <td>@z.DatumUtakmice.ToString("dd.MM.yyyy")</td>
-                        <td>@z.TerenNaziv, @z.TerenGrad</td>
+                        <td>@z.TerenNaziv, @z.TerenMesto</td>
                         <td>@z.NazivDomacina</td>
                         <td>@z.NazivGosta</td>
                         <td class="fw-bold">@z.KonacanRezultatDomacin : @z.KonacanRezultatGost</td>
@@ -138,14 +120,3 @@
     <button onclick="window.print()" class="btn btn-primary">Štampaj</button>
     <a asp-action="Spisak" class="btn btn-secondary">Nazad</a>
 </div>
-
-@section Scripts {
-    <style>
-        @@media 
-        print {
-            .d-print-none { display: none !important; }
-        header, footer, nav { display: none !important; }
-            #oblast-stampe { width: 100%; }
-        }
-    </style>
-}

@@ -15,8 +15,8 @@ namespace SlojPodataka.KlasePodataka
         public int MinutGola { get; set; }
         public string ImeStrelca { get; set; } = string.Empty;
 
-        [ForeignKey("Tim")]
-        public int TimID { get; set; }
-        public Klub Tim { get; set; } = null!;
+        [ForeignKey("Klub")]
+        public int KlubID { get; set; }
+        public Klub Klub { get; set; } = null!;
     }
 }

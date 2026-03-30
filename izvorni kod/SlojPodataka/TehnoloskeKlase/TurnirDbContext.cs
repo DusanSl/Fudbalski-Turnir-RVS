@@ -31,9 +31,9 @@ namespace SlojPodataka.TehnoloskeKlase
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<StavkaZapisnika>()
-                .HasOne(s => s.Tim)
+                .HasOne(s => s.Klub)
                 .WithMany(k => k.Golovi)
-                .HasForeignKey(s => s.TimID)
+                .HasForeignKey(s => s.KlubID)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

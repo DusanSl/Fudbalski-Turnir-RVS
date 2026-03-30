@@ -17,7 +17,7 @@ builder.Services.AddDbContext<TurnirDbContext>(options =>
 
 builder.Services.AddHttpClient("FudbalskiApi", client =>
 {
-    client.BaseAddress = new Uri("https://localhost:7193/");
+    client.BaseAddress = new Uri("http://localhost:5072/");
 });
 
 builder.Services.AddSession();

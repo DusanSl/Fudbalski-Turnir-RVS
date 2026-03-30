@@ -7,10 +7,12 @@
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/stampa.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/PrezentacioniSloj.styles.css" asp-append-version="true" />
+    <script src="~/js/validacije.js" asp-append-version="true"></script>
 </head>
 <body>
-    <header>
+    <header class="d-print-none">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-controller="Zapisnik" asp-action="Spisak">Fudbalski Turnir</a>
@@ -21,7 +23,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Zapisnik" asp-action="Spisak">Zapisnici</a>
+                            <a class="nav-link text-dark" asp-controller="Zapisnik" asp-action="Spisak">Spisak zapisnika</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Zapisnik" asp-action="Unos">Novi zapisnik</a>
@@ -37,6 +39,15 @@
                                 <a class="nav-link text-dark" asp-controller="Nalog" asp-action="Odjava">Odjava</a>
                             </li>
                         }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Nalog" asp-action="Prijava">Prijava</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Nalog" asp-action="Registracija">Registracija</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -48,7 +59,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted d-print-none">
         <div class="container">
             &copy; 2026 - Fudbalski Turnir
         </div>

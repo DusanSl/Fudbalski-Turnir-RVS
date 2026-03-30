@@ -13,7 +13,7 @@ namespace SlojPodataka.KlasePodataka
         public int ZapisnikID { get; set; }
         public DateTime DatumUtakmice { get; set; }
         public string TerenNaziv { get; set; } = string.Empty;
-        public string TerenGrad { get; set; } = string.Empty;
+        public string TerenMesto { get; set; } = string.Empty;
         public string TerenAdresa { get; set; } = string.Empty;
 
         [ForeignKey("Domacin")]
