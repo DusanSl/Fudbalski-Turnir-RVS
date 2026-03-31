@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SlojPodataka.Migrations
 {
     /// <inheritdoc />
-    public partial class PocetnaMigracija : Migration
+    public partial class CelaMigracija : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Klubovi",
+                name: "Klub",
                 columns: table => new
                 {
                     KlubID = table.Column<int>(type: "int", nullable: false)
@@ -27,32 +27,33 @@ namespace SlojPodataka.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Klubovi", x => x.KlubID);
+                    table.PrimaryKey("PK_Klub", x => x.KlubID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Korisnici",
+                name: "Korisnik",
                 columns: table => new
                 {
                     KorisnikID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     KorisnickoIme = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Lozinka = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Korisnici", x => x.KorisnikID);
+                    table.PrimaryKey("PK_Korisnik", x => x.KorisnikID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Zapisnici",
+                name: "Zapisnik",
                 columns: table => new
                 {
                     ZapisnikID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DatumUtakmice = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TerenNaziv = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TerenGrad = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TerenMesto = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TerenAdresa = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DomacinID = table.Column<int>(type: "int", nullable: false),
                     GostID = table.Column<int>(type: "int", nullable: false),
@@ -62,23 +63,23 @@ namespace SlojPodataka.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Zapisnici", x => x.ZapisnikID);
+                    table.PrimaryKey("PK_Zapisnik", x => x.ZapisnikID);
                     table.ForeignKey(
-                        name: "FK_Zapisnici_Klubovi_DomacinID",
+                        name: "FK_Zapisnik_Klub_DomacinID",
                         column: x => x.DomacinID,
-                        principalTable: "Klubovi",
+                        principalTable: "Klub",
                         principalColumn: "KlubID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Zapisnici_Klubovi_GostID",
+                        name: "FK_Zapisnik_Klub_GostID",
                         column: x => x.GostID,
-                        principalTable: "Klubovi",
+                        principalTable: "Klub",
                         principalColumn: "KlubID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "StavkeZapisnika",
+                name: "StavkaZapisnika",
                 columns: table => new
                 {
                     StavkaID = table.Column<int>(type: "int", nullable: false)
@@ -86,44 +87,44 @@ namespace SlojPodataka.Migrations
                     ZapisnikID = table.Column<int>(type: "int", nullable: false),
                     MinutGola = table.Column<int>(type: "int", nullable: false),
                     ImeStrelca = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TimID = table.Column<int>(type: "int", nullable: false),
+                    KlubID = table.Column<int>(type: "int", nullable: false),
                     DatumKreiranja = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StavkeZapisnika", x => x.StavkaID);
+                    table.PrimaryKey("PK_StavkaZapisnika", x => x.StavkaID);
                     table.ForeignKey(
-                        name: "FK_StavkeZapisnika_Klubovi_TimID",
-                        column: x => x.TimID,
-                        principalTable: "Klubovi",
+                        name: "FK_StavkaZapisnika_Klub_KlubID",
+                        column: x => x.KlubID,
+                        principalTable: "Klub",
                         principalColumn: "KlubID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_StavkeZapisnika_Zapisnici_ZapisnikID",
+                        name: "FK_StavkaZapisnika_Zapisnik_ZapisnikID",
                         column: x => x.ZapisnikID,
-                        principalTable: "Zapisnici",
+                        principalTable: "Zapisnik",
                         principalColumn: "ZapisnikID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_StavkeZapisnika_TimID",
-                table: "StavkeZapisnika",
-                column: "TimID");
+                name: "IX_StavkaZapisnika_KlubID",
+                table: "StavkaZapisnika",
+                column: "KlubID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StavkeZapisnika_ZapisnikID",
-                table: "StavkeZapisnika",
+                name: "IX_StavkaZapisnika_ZapisnikID",
+                table: "StavkaZapisnika",
                 column: "ZapisnikID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Zapisnici_DomacinID",
-                table: "Zapisnici",
+                name: "IX_Zapisnik_DomacinID",
+                table: "Zapisnik",
                 column: "DomacinID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Zapisnici_GostID",
-                table: "Zapisnici",
+                name: "IX_Zapisnik_GostID",
+                table: "Zapisnik",
                 column: "GostID");
         }
 
@@ -131,16 +132,16 @@ namespace SlojPodataka.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Korisnici");
+                name: "Korisnik");
 
             migrationBuilder.DropTable(
-                name: "StavkeZapisnika");
+                name: "StavkaZapisnika");
 
             migrationBuilder.DropTable(
-                name: "Zapisnici");
+                name: "Zapisnik");
 
             migrationBuilder.DropTable(
-                name: "Klubovi");
+                name: "Klub");
         }
     }
 }

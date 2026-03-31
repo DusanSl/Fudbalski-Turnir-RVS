@@ -12,8 +12,8 @@ using SlojPodataka.TehnoloskeKlase;
 namespace SlojPodataka.Migrations
 {
     [DbContext(typeof(TurnirDbContext))]
-    [Migration("20260330123702_PreimenovanjeKolona")]
-    partial class PreimenovanjeKolona
+    [Migration("20260331142928_CelaMigracija")]
+    partial class CelaMigracija
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,7 +60,7 @@ namespace SlojPodataka.Migrations
 
                     b.HasKey("KlubID");
 
-                    b.ToTable("Klubovi");
+                    b.ToTable("Klub");
                 });
 
             modelBuilder.Entity("SlojPodataka.KlasePodataka.Korisnik", b =>
@@ -70,6 +70,10 @@ namespace SlojPodataka.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("KorisnikID"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("KorisnickoIme")
                         .IsRequired()
@@ -81,7 +85,7 @@ namespace SlojPodataka.Migrations
 
                     b.HasKey("KorisnikID");
 
-                    b.ToTable("Korisnici");
+                    b.ToTable("Korisnik");
                 });
 
             modelBuilder.Entity("SlojPodataka.KlasePodataka.StavkaZapisnika", b =>
@@ -114,7 +118,7 @@ namespace SlojPodataka.Migrations
 
                     b.HasIndex("ZapisnikID");
 
-                    b.ToTable("StavkeZapisnika");
+                    b.ToTable("StavkaZapisnika");
                 });
 
             modelBuilder.Entity("SlojPodataka.KlasePodataka.Zapisnik", b =>
@@ -161,7 +165,7 @@ namespace SlojPodataka.Migrations
 
                     b.HasIndex("GostID");
 
-                    b.ToTable("Zapisnici");
+                    b.ToTable("Zapisnik");
                 });
 
             modelBuilder.Entity("SlojPodataka.KlasePodataka.StavkaZapisnika", b =>
