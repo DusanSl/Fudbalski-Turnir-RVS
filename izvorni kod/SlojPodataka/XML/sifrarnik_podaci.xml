@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
+<Podaci>
 <Klubovi>
 	<Klub>
 		<NazivKluba>FC Barcelona</NazivKluba>
@@ -55,3 +56,53 @@
 		<GodinaOsnivanja>1897</GodinaOsnivanja>
 	</Klub>
 </Klubovi>
+	<Korisnici>
+		<Korisnik>
+			<KorisnikID>1</KorisnikID>
+			<KorisnickoIme>admin</KorisnickoIme>
+			<Email>admin@gmail.com</Email>
+			<Lozinka>admin123</Lozinka>
+		</Korisnik>
+	</Korisnici>
+
+	<Zapisnici>
+		<Zapisnik>
+			<ZapisnikID>1</ZapisnikID>
+			<DatumUtakmice>2026-03-31T20:00:00</DatumUtakmice>
+			<TerenNaziv>Camp Nou</TerenNaziv>
+			<TerenMesto>Barcelona</TerenMesto>
+			<TerenAdresa>Carrer d'Aristides Maillol</TerenAdresa>
+			<DomacinID>1</DomacinID>
+			<GostID>2</GostID>
+			<KonacanRezultatDomacin>2</KonacanRezultatDomacin>
+			<KonacanRezultatGost>1</KonacanRezultatGost>
+		</Zapisnik>
+	</Zapisnici>
+
+	<StavkeZapisnika>
+		<StavkaZapisnika>
+			<StavkaID>1</StavkaID>
+			<ZapisnikID>1</ZapisnikID>
+			<KlubID>1</KlubID>
+			<MinutGola>19</MinutGola>
+			<ImeStrelca>Lewandowski</ImeStrelca>
+		</StavkaZapisnika>
+
+		<StavkaZapisnika>
+			<StavkaID>2</StavkaID>
+			<ZapisnikID>1</ZapisnikID>
+			<KlubID>2</KlubID>
+			<MinutGola>41</MinutGola>
+			<ImeStrelca>Bellingham</ImeStrelca>
+		</StavkaZapisnika>
+
+		<StavkaZapisnika>
+			<StavkaID>3</StavkaID>
+			<ZapisnikID>1</ZapisnikID>
+			<KlubID>1</KlubID>
+			<MinutGola>83</MinutGola>
+			<ImeStrelca>Pedri</ImeStrelca>
+		</StavkaZapisnika>
+	</StavkeZapisnika>
+
+</Podaci>

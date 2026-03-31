@@ -45,7 +45,8 @@ using (var opseg = app.Services.CreateScope())
     var kontekst = opseg.ServiceProvider.GetRequiredService<TurnirDbContext>();
     var putanja = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
         "..", "..", "..", "..", "SlojPodataka", "XML", "sifrarnik_podaci.xml");
-    SlojPodataka.TehnoloskeKlase.PocetniPodaci.PopuniKlubove(kontekst, putanja);
+
+    PocetniPodaci.PopuniSve(kontekst, putanja);
 }
 
 app.Run();
