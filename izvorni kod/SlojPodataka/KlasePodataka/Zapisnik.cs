@@ -7,6 +7,7 @@ using System.Text;
 
 namespace SlojPodataka.KlasePodataka
 {
+    [Table("Zapisnik")]
     public class Zapisnik : OsnovniEntitet
     {
         [Key]
