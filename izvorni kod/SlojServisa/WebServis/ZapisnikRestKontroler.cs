@@ -54,10 +54,8 @@ namespace SlojServisa.Webservis
             if (postojiZapisnik)
                 return BadRequest("Već postoji zapisnik za ovu utakmicu na isti datum.");
 
-            var sortirane = dto.Stavke.OrderBy(s => s.MinutGola).ToList();
             var postojeciMinuti = new List<int>();
-
-            foreach (var stavka in sortirane)
+            foreach (var stavka in dto.Stavke)
             {
                 var (uspesno, poruka) = _validator.ValidirajMinutGola(stavka.MinutGola, postojeciMinuti);
                 if (!uspesno)
@@ -82,10 +80,9 @@ namespace SlojServisa.Webservis
         {
             dto.ZapisnikID = id;
 
-            var sortirane = dto.Stavke.OrderBy(s => s.MinutGola).ToList();
             var postojeciMinuti = new List<int>();
 
-            foreach (var stavka in sortirane)
+            foreach (var stavka in dto.Stavke)
             {
                 var (uspesno, poruka) = _validator.ValidirajMinutGola(stavka.MinutGola, postojeciMinuti);
                 if (!uspesno)

@@ -52,7 +52,7 @@ function validirajFormu() {
             prethodniMinut = trenutniMinut;
         }
 
-        if (KlubID && KlubID.value === '')
+        if (klubID && klubID.value === '')
             greske.push(`Stavka ${i + 1}: Klub je obavezan.`);
     });
 
