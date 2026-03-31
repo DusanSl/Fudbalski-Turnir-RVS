@@ -57,7 +57,7 @@ namespace SlojPodataka.Migrations
 
                     b.HasKey("KlubID");
 
-                    b.ToTable("Klubovi");
+                    b.ToTable("Klub");
                 });
 
             modelBuilder.Entity("SlojPodataka.KlasePodataka.Korisnik", b =>
@@ -82,7 +82,7 @@ namespace SlojPodataka.Migrations
 
                     b.HasKey("KorisnikID");
 
-                    b.ToTable("Korisnici");
+                    b.ToTable("Korisnik");
                 });
 
             modelBuilder.Entity("SlojPodataka.KlasePodataka.StavkaZapisnika", b =>
@@ -115,7 +115,7 @@ namespace SlojPodataka.Migrations
 
                     b.HasIndex("ZapisnikID");
 
-                    b.ToTable("StavkeZapisnika");
+                    b.ToTable("StavkaZapisnika");
                 });
 
             modelBuilder.Entity("SlojPodataka.KlasePodataka.Zapisnik", b =>
@@ -162,7 +162,7 @@ namespace SlojPodataka.Migrations
 
                     b.HasIndex("GostID");
 
-                    b.ToTable("Zapisnici");
+                    b.ToTable("Zapisnik");
                 });
 
             modelBuilder.Entity("SlojPodataka.KlasePodataka.StavkaZapisnika", b =>

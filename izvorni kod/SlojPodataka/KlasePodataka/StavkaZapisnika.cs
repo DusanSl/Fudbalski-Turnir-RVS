@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SlojPodataka.KlasePodataka
 {
+    [Table("StavkaZapisnika")]
     public class StavkaZapisnika : OsnovniEntitet
     {
         [Key]

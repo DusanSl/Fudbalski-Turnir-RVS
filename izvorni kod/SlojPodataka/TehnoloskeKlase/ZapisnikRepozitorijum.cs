@@ -19,6 +19,7 @@ namespace SlojPodataka.TehnoloskeKlase
         public List<Zapisnik> DohvatiSve()
         {
             return _kontekst.Zapisnici
+                .AsNoTracking()
                 .Include(z => z.Domacin)
                 .Include(z => z.Gost)
                 .Include(z => z.Stavke)
@@ -57,8 +58,13 @@ namespace SlojPodataka.TehnoloskeKlase
             using var transakcija = _kontekst.Database.BeginTransaction();
             try
             {
+                var stareStavke = _kontekst.StavkeZapisnika
+                    .Where(s => s.ZapisnikID == zapisnik.ZapisnikID)
+                    .ToList();
+                _kontekst.StavkeZapisnika.RemoveRange(stareStavke);
+                _kontekst.SaveChanges();
+
                 var postojeci = _kontekst.Zapisnici
-                    .Include(z => z.Stavke)
                     .FirstOrDefault(z => z.ZapisnikID == zapisnik.ZapisnikID);
 
                 if (postojeci == null) throw new Exception("Zapisnik nije pronađen.");
@@ -72,10 +78,10 @@ namespace SlojPodataka.TehnoloskeKlase
                 postojeci.KonacanRezultatDomacin = zapisnik.KonacanRezultatDomacin;
                 postojeci.KonacanRezultatGost = zapisnik.KonacanRezultatGost;
 
-                _kontekst.StavkeZapisnika.RemoveRange(postojeci.Stavke);
                 foreach (var stavka in zapisnik.Stavke)
                 {
                     stavka.ZapisnikID = postojeci.ZapisnikID;
+                    stavka.StavkaID = 0;
                     _kontekst.StavkeZapisnika.Add(stavka);
                 }
 

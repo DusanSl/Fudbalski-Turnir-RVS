@@ -6,6 +6,7 @@
 <h2 class="mb-4">Izmena zapisnika</h2>
 
 <form asp-action="Izmena" asp-route-id="@Model.ZapisnikID" method="post" id="forma-zapisnik">
+    <input type="hidden" asp-for="ZapisnikID" />
     <div asp-validation-summary="All" class="text-danger mb-3"></div>
 
     <div class="card mb-4">
