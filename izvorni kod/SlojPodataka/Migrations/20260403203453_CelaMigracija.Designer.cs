@@ -12,7 +12,7 @@ using SlojPodataka.TehnoloskeKlase;
 namespace SlojPodataka.Migrations
 {
     [DbContext(typeof(TurnirDbContext))]
-    [Migration("20260331142928_CelaMigracija")]
+    [Migration("20260403203453_CelaMigracija")]
     partial class CelaMigracija
     {
         /// <inheritdoc />
@@ -35,7 +35,8 @@ namespace SlojPodataka.Migrations
 
                     b.Property<string>("Adresa")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<int>("BrojIgraca")
                         .HasColumnType("int");
@@ -48,15 +49,18 @@ namespace SlojPodataka.Migrations
 
                     b.Property<string>("Grad")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("NazivKluba")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Stadion")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("KlubID");
 
@@ -73,15 +77,18 @@ namespace SlojPodataka.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("KorisnickoIme")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Lozinka")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("KorisnikID");
 
@@ -101,7 +108,8 @@ namespace SlojPodataka.Migrations
 
                     b.Property<string>("ImeStrelca")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("KlubID")
                         .HasColumnType("int");
@@ -149,15 +157,18 @@ namespace SlojPodataka.Migrations
 
                     b.Property<string>("TerenAdresa")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("TerenMesto")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("TerenNaziv")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("ZapisnikID");
 

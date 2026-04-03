@@ -17,10 +17,10 @@ namespace SlojPodataka.Migrations
                 {
                     KlubID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NazivKluba = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Grad = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Stadion = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Adresa = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NazivKluba = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Grad = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Stadion = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Adresa = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     BrojIgraca = table.Column<int>(type: "int", nullable: false),
                     BrojOsvojenihTitula = table.Column<int>(type: "int", nullable: false),
                     GodinaOsnivanja = table.Column<int>(type: "int", nullable: false)
@@ -36,9 +36,9 @@ namespace SlojPodataka.Migrations
                 {
                     KorisnikID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    KorisnickoIme = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Lozinka = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    KorisnickoIme = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Lozinka = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -52,9 +52,9 @@ namespace SlojPodataka.Migrations
                     ZapisnikID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DatumUtakmice = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TerenNaziv = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TerenMesto = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TerenAdresa = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TerenNaziv = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    TerenMesto = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    TerenAdresa = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     DomacinID = table.Column<int>(type: "int", nullable: false),
                     GostID = table.Column<int>(type: "int", nullable: false),
                     KonacanRezultatDomacin = table.Column<int>(type: "int", nullable: false),
@@ -86,7 +86,7 @@ namespace SlojPodataka.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ZapisnikID = table.Column<int>(type: "int", nullable: false),
                     MinutGola = table.Column<int>(type: "int", nullable: false),
-                    ImeStrelca = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImeStrelca = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     KlubID = table.Column<int>(type: "int", nullable: false),
                     DatumKreiranja = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
