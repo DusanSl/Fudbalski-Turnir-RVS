@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace PrezentacioniSloj.PrezentacionaLogika.ViewModels
 {
@@ -11,7 +11,7 @@ namespace PrezentacioniSloj.PrezentacionaLogika.ViewModels
         public int MinutGola { get; set; }
 
         [Required(ErrorMessage = "Ime strelca je obavezno.")]
-        [StringLength(100, ErrorMessage = "Ime strelca ne može biti duže od 100 karaktera.")]
+        [StringLength(100, MinimumLength = 2, ErrorMessage = "Ime strelca mora imati najmanje 2 i ne više od 100 karaktera.")]
         public string ImeStrelca { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Klub je obavezan.")]

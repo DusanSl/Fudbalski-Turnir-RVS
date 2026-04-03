@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace PrezentacioniSloj.PrezentacionaLogika.ViewModels
 {
@@ -9,6 +9,7 @@ namespace PrezentacioniSloj.PrezentacionaLogika.ViewModels
         public string KorisnickoIme { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Email je obavezan.")]
+        [StringLength(100, ErrorMessage = "Email ne može biti duži od 100 karaktera.")]
         [EmailAddress(ErrorMessage = "Email nije ispravan.")]
         public string Email { get; set; } = string.Empty;
 
