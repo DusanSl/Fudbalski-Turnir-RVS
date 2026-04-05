@@ -9,6 +9,10 @@ function validirajFormu() {
     var terenAdresa = document.querySelector('[name="TerenAdresa"]');
     var domacinID = document.querySelector('[name="DomacinID"]');
     var gostID = document.querySelector('[name="GostID"]');
+    var datumUtakmice = document.querySelector('[name="DatumUtakmice"]');
+
+    if (datumUtakmice && datumUtakmice.value.trim() === '')
+        greske.push('Datum utakmice je obavezan.');
 
     if (terenNaziv && terenNaziv.value.trim() === '')
         greske.push('Naziv terena je obavezan.');
