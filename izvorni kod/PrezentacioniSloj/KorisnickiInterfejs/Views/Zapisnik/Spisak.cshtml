@@ -36,7 +36,11 @@
         <div class="col-md-3 d-flex align-items-end gap-2">
             <button type="submit" class="btn btn-primary">Filtriraj</button>
             <a asp-action="Spisak" class="btn btn-secondary">Poništi</a>
-            <a asp-action="Stampa" class="btn btn-outline-secondary">Štampa</a>
+            <a asp-action="Stampa"
+               asp-route-datumOd="@Model.DatumOd?.ToString("yyyy-MM-dd")"
+               asp-route-datumDo="@Model.DatumDo?.ToString("yyyy-MM-dd")"
+               asp-route-filterKlubId="@Model.FilterKlubId"
+               class="btn btn-outline-secondary">Štampa</a>
         </div>
     </div>
 </form>
