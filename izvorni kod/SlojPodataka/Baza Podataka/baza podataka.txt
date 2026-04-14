@@ -1,0 +1,73 @@
+IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+BEGIN
+    CREATE TABLE [__EFMigrationsHistory] (
+        [MigrationId] nvarchar(150) NOT NULL,
+        [ProductVersion] nvarchar(32) NOT NULL,
+        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+    );
+END;
+GO
+
+BEGIN TRANSACTION;
+CREATE TABLE [Klub] (
+    [KlubID] int NOT NULL IDENTITY,
+    [NazivKluba] nvarchar(100) NOT NULL,
+    [Grad] nvarchar(50) NOT NULL,
+    [Stadion] nvarchar(100) NOT NULL,
+    [Adresa] nvarchar(200) NOT NULL,
+    [BrojIgraca] int NOT NULL,
+    [BrojOsvojenihTitula] int NOT NULL,
+    [GodinaOsnivanja] int NOT NULL,
+    CONSTRAINT [PK_Klub] PRIMARY KEY ([KlubID])
+);
+
+CREATE TABLE [Korisnik] (
+    [KorisnikID] int NOT NULL IDENTITY,
+    [KorisnickoIme] nvarchar(50) NOT NULL,
+    [Email] nvarchar(100) NOT NULL,
+    [Lozinka] nvarchar(100) NOT NULL,
+    CONSTRAINT [PK_Korisnik] PRIMARY KEY ([KorisnikID])
+);
+
+CREATE TABLE [Zapisnik] (
+    [ZapisnikID] int NOT NULL IDENTITY,
+    [DatumUtakmice] datetime2 NOT NULL,
+    [TerenNaziv] nvarchar(100) NOT NULL,
+    [TerenMesto] nvarchar(100) NOT NULL,
+    [TerenAdresa] nvarchar(200) NOT NULL,
+    [DomacinID] int NOT NULL,
+    [GostID] int NOT NULL,
+    [KonacanRezultatDomacin] int NOT NULL,
+    [KonacanRezultatGost] int NOT NULL,
+    [DatumKreiranja] datetime2 NOT NULL,
+    CONSTRAINT [PK_Zapisnik] PRIMARY KEY ([ZapisnikID]),
+    CONSTRAINT [FK_Zapisnik_Klub_DomacinID] FOREIGN KEY ([DomacinID]) REFERENCES [Klub] ([KlubID]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Zapisnik_Klub_GostID] FOREIGN KEY ([GostID]) REFERENCES [Klub] ([KlubID]) ON DELETE NO ACTION
+);
+
+CREATE TABLE [StavkaZapisnika] (
+    [StavkaID] int NOT NULL IDENTITY,
+    [ZapisnikID] int NOT NULL,
+    [MinutGola] int NOT NULL,
+    [ImeStrelca] nvarchar(100) NOT NULL,
+    [KlubID] int NOT NULL,
+    [DatumKreiranja] datetime2 NOT NULL,
+    CONSTRAINT [PK_StavkaZapisnika] PRIMARY KEY ([StavkaID]),
+    CONSTRAINT [FK_StavkaZapisnika_Klub_KlubID] FOREIGN KEY ([KlubID]) REFERENCES [Klub] ([KlubID]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_StavkaZapisnika_Zapisnik_ZapisnikID] FOREIGN KEY ([ZapisnikID]) REFERENCES [Zapisnik] ([ZapisnikID]) ON DELETE CASCADE
+);
+
+CREATE INDEX [IX_StavkaZapisnika_KlubID] ON [StavkaZapisnika] ([KlubID]);
+
+CREATE INDEX [IX_StavkaZapisnika_ZapisnikID] ON [StavkaZapisnika] ([ZapisnikID]);
+
+CREATE INDEX [IX_Zapisnik_DomacinID] ON [Zapisnik] ([DomacinID]);
+
+CREATE INDEX [IX_Zapisnik_GostID] ON [Zapisnik] ([GostID]);
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20260403203453_CelaMigracija', N'10.0.5');
+
+COMMIT;
+GO
+
