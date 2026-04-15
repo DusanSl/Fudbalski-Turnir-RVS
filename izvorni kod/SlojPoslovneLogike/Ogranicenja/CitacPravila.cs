@@ -1,35 +1,39 @@
-﻿using System.Xml.Linq;
+﻿using System.Net.Http.Json;
 
 namespace SlojPoslovneLogike.Ogranicenja
 {
     public class CitacPravila
     {
-        private readonly string _putanjaXml;
+        private readonly HttpClient _httpClient;
+        private const string _urlServisa = "http://localhost:5072/api/PravilaRest";
 
-        public CitacPravila(string putanjaXml)
+        public CitacPravila(HttpClient httpClient)
         {
-            _putanjaXml = putanjaXml;
+            _httpClient = httpClient;
         }
 
-        public int DohvatiMinimalniRazmak()
+        public async Task<int> DohvatiMinimalniRazmak()
         {
-            var xml = XDocument.Load(_putanjaXml);
-            var vrednost = xml.Root?.Element("MinimalniRazmakMinuta")?.Value;
-            return int.TryParse(vrednost, out int rezultat) ? rezultat : 1;
+            var pravila = await _httpClient.GetFromJsonAsync<PravilaModel>(_urlServisa);
+            return pravila?.MinimalniRazmakMinuta ?? 1;
         }
 
-        public int DohvatiMaksimalniMinut()
+        public async Task<int> DohvatiMaksimalniMinut()
         {
-            var xml = XDocument.Load(_putanjaXml);
-            var vrednost = xml.Root?.Element("MaksimalniMinutGola")?.Value;
-            return int.TryParse(vrednost, out int rezultat) ? rezultat : 90;
+            var pravila = await _httpClient.GetFromJsonAsync<PravilaModel>(_urlServisa);
+            return pravila?.MaksimalniMinutGola ?? 90;
         }
 
-        public int DohvatiMinimalniMinut()
+        public async Task<int> DohvatiMinimalniMinut()
         {
-            var xml = XDocument.Load(_putanjaXml);
-            var vrednost = xml.Root?.Element("MinimalniMinutGola")?.Value;
-            return int.TryParse(vrednost, out int rezultat) ? rezultat : 1;
+            var pravila = await _httpClient.GetFromJsonAsync<PravilaModel>(_urlServisa);
+            return pravila?.MinimalniMinutGola ?? 1;
         }
+    }
+    public class PravilaModel
+    {
+        public int MinimalniRazmakMinuta { get; set; }
+        public int MaksimalniMinutGola { get; set; }
+        public int MinimalniMinutGola { get; set; }
     }
 }
