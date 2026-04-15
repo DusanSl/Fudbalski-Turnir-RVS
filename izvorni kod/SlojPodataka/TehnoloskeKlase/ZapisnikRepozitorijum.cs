@@ -4,6 +4,8 @@ using System.Text;
 ﻿using Microsoft.EntityFrameworkCore;
 using SlojPodataka.KlasePodataka;
 using SlojPodataka.TehnoloskeKlase;
+using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace SlojPodataka.TehnoloskeKlase
 {
@@ -145,6 +147,19 @@ namespace SlojPodataka.TehnoloskeKlase
                 .OrderBy(s => s.MinutGola)
                 .Select(s => s.MinutGola)
                 .ToList();
+        }
+
+        public int DohvatiUkupanBrojZapisnikaPrekoSP()
+        {
+            using (SqlConnection conn = new SqlConnection(_kontekst.Database.GetConnectionString()))
+            {
+                SqlCommand cmd = new SqlCommand("sp_DajUkupanBrojZapisnika", conn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                conn.Open();
+                var rezultat = cmd.ExecuteScalar();
+                return (int)rezultat;
+            }
         }
 
         public List<Klub> DohvatiKlubove()

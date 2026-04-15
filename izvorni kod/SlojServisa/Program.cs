@@ -11,9 +11,11 @@ builder.Services.AddDbContext<TurnirDbContext>(options =>
         .GetConnectionString("PodrazumevanaKonekcija")));
 
 builder.Services.AddScoped<ZapisnikRepozitorijum>();
-builder.Services.AddScoped<CitacPravila>(provider =>
-    new CitacPravila(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-        "Ogranicenja", "pravila_hronologije.xml")));
+builder.Services.AddHttpClient();
+
+builder.Services.AddScoped<SlojPoslovneLogike.Ogranicenja.CitacPravila>();
+
+builder.Services.AddScoped<SlojPoslovneLogike.Validacija.PoslovnoPraviloValidator>();
 
 var app = builder.Build();
 

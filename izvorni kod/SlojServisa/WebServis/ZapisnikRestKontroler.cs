@@ -44,7 +44,7 @@ namespace SlojServisa.Webservis
         }
 
         [HttpPost]
-        public ActionResult Dodaj([FromBody] ZapisnikDTO dto)
+        public async Task<ActionResult> Dodaj([FromBody] ZapisnikDTO dto)
         {
             var postojiZapisnik = _repozitorijum.DohvatiSve()
                 .Any(z => z.DomacinID == dto.DomacinID
@@ -57,7 +57,7 @@ namespace SlojServisa.Webservis
             var postojeciMinuti = new List<int>();
             foreach (var stavka in dto.Stavke)
             {
-                var (uspesno, poruka) = _validator.ValidirajMinutGola(stavka.MinutGola, postojeciMinuti);
+                var (uspesno, poruka) = await _validator.ValidirajMinutGola(stavka.MinutGola, postojeciMinuti);
                 if (!uspesno)
                     return BadRequest(poruka);
 
@@ -76,7 +76,7 @@ namespace SlojServisa.Webservis
         }
 
         [HttpPut("{id}")]
-        public ActionResult Izmeni(int id, [FromBody] ZapisnikDTO dto)
+        public async Task<ActionResult> Izmeni(int id, [FromBody] ZapisnikDTO dto)
         {
             dto.ZapisnikID = id;
 
@@ -84,7 +84,7 @@ namespace SlojServisa.Webservis
 
             foreach (var stavka in dto.Stavke)
             {
-                var (uspesno, poruka) = _validator.ValidirajMinutGola(stavka.MinutGola, postojeciMinuti);
+                var (uspesno, poruka) = await _validator.ValidirajMinutGola(stavka.MinutGola, postojeciMinuti);
                 if (!uspesno)
                     return BadRequest(poruka);
 
