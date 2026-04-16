@@ -43,11 +43,14 @@ namespace PrezentacioniSloj.PrezentacionaLogika.Kontroleri
                 return View(model);
             }
 
+            var salt = FunkcijeLozinke.GenerisiSalt();
+
             var korisnik = new SlojPodataka.KlasePodataka.Korisnik
             {
                 KorisnickoIme = model.KorisnickoIme,
                 Email = model.Email,
-                Lozinka = model.Lozinka
+                Salt = salt,
+                LozinkaHes = FunkcijeLozinke.IzracunajHash(model.Lozinka, salt)
             };
 
             _kontekst.Korisnici.Add(korisnik);
@@ -69,11 +72,12 @@ namespace PrezentacioniSloj.PrezentacionaLogika.Kontroleri
             if (!ModelState.IsValid)
                 return View(model);
 
-            var korisnik = _kontekst.Korisnici
-                .FirstOrDefault(k => k.KorisnickoIme == model.KorisnickoIme
-                                  && k.Lozinka == model.Lozinka);
+            var salt = FunkcijeLozinke.GenerisiSalt();
 
-            if (korisnik == null)
+            var korisnik = _kontekst.Korisnici
+                .FirstOrDefault(k => k.KorisnickoIme == model.KorisnickoIme);
+
+            if (korisnik == null || !FunkcijeLozinke.ProveriLozinku(model.Lozinka, korisnik.Salt, korisnik.LozinkaHes))
             {
                 ModelState.AddModelError("", "Pogrešno korisničko ime ili lozinka.");
                 return View(model);

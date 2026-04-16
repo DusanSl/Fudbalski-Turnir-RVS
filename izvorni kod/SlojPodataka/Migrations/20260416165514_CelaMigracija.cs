@@ -38,7 +38,8 @@ namespace SlojPodataka.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     KorisnickoIme = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Lozinka = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                    LozinkaHes = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    Salt = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false)
                 },
                 constraints: table =>
                 {
