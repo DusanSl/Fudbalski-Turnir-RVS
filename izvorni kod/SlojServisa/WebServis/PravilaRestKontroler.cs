@@ -13,17 +13,6 @@ namespace SlojServisa.WebServis
             try
             {
                 var putanja = Path.Combine(AppContext.BaseDirectory, "Ogranicenja", "pravila_hronologije.xml");
-
-                if (!System.IO.File.Exists(putanja))
-                {
-                    putanja = Path.Combine(Directory.GetCurrentDirectory(), "Ogranicenja", "pravila_hronologije.xml");
-                }
-
-                if (!System.IO.File.Exists(putanja))
-                {
-                    return StatusCode(500, $"Fajl nije nađen na lokaciji: {putanja}");
-                }
-
                 var xml = XDocument.Load(putanja);
 
                 return Ok(new

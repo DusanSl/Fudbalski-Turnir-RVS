@@ -12,7 +12,7 @@ using SlojPodataka.TehnoloskeKlase;
 namespace SlojPodataka.Migrations
 {
     [DbContext(typeof(TurnirDbContext))]
-    [Migration("20260403203453_CelaMigracija")]
+    [Migration("20260416165514_CelaMigracija")]
     partial class CelaMigracija
     {
         /// <inheritdoc />
@@ -85,10 +85,15 @@ namespace SlojPodataka.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Lozinka")
+                    b.Property<string>("LozinkaHes")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("Salt")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
 
                     b.HasKey("KorisnikID");
 

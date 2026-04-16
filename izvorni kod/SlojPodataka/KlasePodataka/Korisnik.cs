@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace SlojPodataka.KlasePodataka
 {
@@ -19,7 +16,10 @@ namespace SlojPodataka.KlasePodataka
         [EmailAddress]
         public string Email { get; set; } = string.Empty;
         [Required]
-        [StringLength(100, MinimumLength = 6)]
-        public string Lozinka { get; set; } = string.Empty;
+        [StringLength(256)]
+        public string LozinkaHes { get; set; } = string.Empty;
+        [Required]
+        [StringLength(64)]
+        public string Salt { get; set; } = string.Empty;
     }
 }

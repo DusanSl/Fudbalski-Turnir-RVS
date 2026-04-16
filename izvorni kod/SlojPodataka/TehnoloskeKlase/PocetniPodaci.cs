@@ -41,11 +41,16 @@ namespace SlojPodataka.TehnoloskeKlase
         {
             if (kontekst.Korisnici.Any()) return;
 
-            var korisnici = xml.Descendants("Korisnik").Select(k => new Korisnik
-            {
-                KorisnickoIme = k.Element("KorisnickoIme")?.Value ?? "",
-                Email = k.Element("Email")?.Value ?? "",
-                Lozinka = k.Element("Lozinka")?.Value ?? ""
+            var korisnici = xml.Descendants("Korisnik").Select(k => {
+                var lozinka = k.Element("Lozinka")?.Value ?? "";
+                var salt = FunkcijeLozinke.GenerisiSalt();
+                return new Korisnik
+                {
+                    KorisnickoIme = k.Element("KorisnickoIme")?.Value ?? "",
+                    Email = k.Element("Email")?.Value ?? "",
+                    Salt = salt,
+                    LozinkaHes = FunkcijeLozinke.IzracunajHash(lozinka, salt)
+                };
             }).ToList();
 
             if (korisnici.Any())

@@ -8,7 +8,7 @@ namespace SlojPodataka.TehnoloskeKlase
     {
         public int IzbrojKlubove()
         {
-            var dt = IzvrsiUpit("SELECT COUNT(*) FROM Klubovi");
+            var dt = IzvrsiUpit("SELECT COUNT(*) FROM Klub");
             return (int)dt.Rows[0][0];
         }
     }
