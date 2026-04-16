@@ -6,7 +6,7 @@ Ovaj projekat je razvijen kao pokazni primer višeslojne arhitekture (N-Tier) ko
 
 ## Funkcionalnosti
 
-- **Autentifikacija korisnika**: Siguran pristup sistemu samo za ovlašćena lica.
+- **Autentifikacija korisnika**: Siguran pristup sistemu samo za ovlašćena lica uz kriptovanje lozinki (hash funkcije i salt) za povećanu bezbednost podataka.
 - **Upravljanje klubovima (Šifarnik)**: Evidencija fudbalskih klubova, njihovih stadiona i osnovnih informacija.
 - **Evidencija utakmica**: Unos i pregled zapisnika sa utakmica na interfejsu koji na jednoj formi obrađuje i utakmicu i njene detalje (kroz sistemske transakcije baze).
 - **Praćenje golova**: Detaljan unos svakog gola (minut, strelac, tim) u okviru jedne utakmice.
@@ -17,7 +17,7 @@ Ovaj projekat je razvijen kao pokazni primer višeslojne arhitekture (N-Tier) ko
 ## Tehnologije
 
 - **Backend**: C#, ASP.NET Core MVC, ASP.NET Core Web API (REST)
-- **Baza podataka**: MS SQL Server, Entity Framework Core (Code-First pristup)
+- **Baza podataka**: MS SQL Server, Entity Framework Core (Code-First pristup) uz rad sa sirovim ADO.NET mehanizmima (DBUtils) i uskladištenim procedurama (Stored Procedures)
 - **Frontend**: HTML5, CSS3, Bootstrap, JavaScript (klijentska validacija uz regularne izraze, asinhroni pozivi)
 - **Arhitektura**: Solid struktura organizovana kroz 4 odvojena sloja
 
@@ -35,7 +35,7 @@ Aplikacija strogo poštuje princip odvajanja odgovornosti i podeljena je u četi
    Mozak aplikacije. Ovde se nalaze specifična poslovna pravila. Sloj je napravljen na način da su logička ograničenja parametrizovana tj. učitavaju se dinamički iz XML datoteka, što omogućava izmenu pravila na nivou turnira bez rekompajliranja koda.
 
 4. **Sloj Podataka (`SlojPodataka`)** 
-   Upravlja perzistencijom nad MS SQL bazom podataka, služeći se Entity Framework Core-om i repozitorijum (Repository) šablonom uz punu podršku unutrašnjih baza-transakcija kod ulančanih unosa.
+   Upravlja perzistencijom nad MS SQL bazom podataka, služeći se Entity Framework Core-om i repozitorijum (Repository) šablonom uz punu podršku unutrašnjih baza-transakcija kod ulančanih unosa. Pored ORM pristupa, za specifične i kompleksnije upite koristi se i ADO.NET posredstvom pomoćnih baza-klasa (`DBUtils`) i uskladištenih procedura.
 
 ## Model Podataka
 
