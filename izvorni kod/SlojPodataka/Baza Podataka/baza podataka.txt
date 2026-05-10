@@ -25,7 +25,8 @@ CREATE TABLE [Korisnik] (
     [KorisnikID] int NOT NULL IDENTITY,
     [KorisnickoIme] nvarchar(50) NOT NULL,
     [Email] nvarchar(100) NOT NULL,
-    [Lozinka] nvarchar(100) NOT NULL,
+    [LozinkaHes] nvarchar(256) NOT NULL,
+    [Salt] nvarchar(64) NOT NULL,
     CONSTRAINT [PK_Korisnik] PRIMARY KEY ([KorisnikID])
 );
 
@@ -66,7 +67,7 @@ CREATE INDEX [IX_Zapisnik_DomacinID] ON [Zapisnik] ([DomacinID]);
 CREATE INDEX [IX_Zapisnik_GostID] ON [Zapisnik] ([GostID]);
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20260403203453_CelaMigracija', N'10.0.5');
+VALUES (N'20260416165514_CelaMigracija', N'10.0.5');
 
 COMMIT;
 GO
