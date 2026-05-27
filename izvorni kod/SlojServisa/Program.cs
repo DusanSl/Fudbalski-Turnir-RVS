@@ -11,14 +11,22 @@ builder.Services.AddDbContext<TurnirDbContext>(options =>
         .GetConnectionString("PodrazumevanaKonekcija")));
 
 builder.Services.AddScoped<ZapisnikRepozitorijum>();
+builder.Services.AddScoped<KorisnikRepozitorijum>();
 builder.Services.AddHttpClient();
-
-builder.Services.AddScoped<SlojPoslovneLogike.Ogranicenja.CitacPravila>();
-
+builder.Services.AddScoped<CitacPravila>();
 builder.Services.AddScoped<SlojPoslovneLogike.Validacija.PoslovnoPraviloValidator>();
 
 var app = builder.Build();
 
+using (var opseg = app.Services.CreateScope())
+{
+    var kontekst = opseg.ServiceProvider.GetRequiredService<TurnirDbContext>();
+    var putanja = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+        "..", "..", "..", "..", "SlojPodataka", "XML", "sifrarnik_podaci.xml");
+    PocetniPodaci.PopuniSve(kontekst, putanja);
+}
+
+app.UseRouting();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

@@ -11,9 +11,6 @@ builder.Services.AddControllersWithViews()
         opcije.ViewLocationFormats.Add("/KorisnickiInterfejs/Views/Shared/{0}.cshtml");
     });
 
-builder.Services.AddDbContext<TurnirDbContext>(options =>
-    options.UseSqlServer(builder.Configuration
-        .GetConnectionString("PodrazumevanaKonekcija")));
 
 builder.Services.AddHttpClient("FudbalskiApi", client =>
 {
@@ -39,14 +36,5 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Nalog}/{action=Prijava}/{id?}");
-
-using (var opseg = app.Services.CreateScope())
-{
-    var kontekst = opseg.ServiceProvider.GetRequiredService<TurnirDbContext>();
-    var putanja = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-        "..", "..", "..", "..", "SlojPodataka", "XML", "sifrarnik_podaci.xml");
-
-    PocetniPodaci.PopuniSve(kontekst, putanja);
-}
 
 app.Run();
