@@ -9,18 +9,17 @@ namespace SlojServisa.Webservis
     [Route("api/[controller]")]
     public class KorisnikRestController : ControllerBase
     {
-        private readonly TurnirDbContext _kontekst;
+        private readonly KorisnikRepozitorijum _repozitorijum;
 
-        public KorisnikRestController(TurnirDbContext kontekst)
+        public KorisnikRestController(KorisnikRepozitorijum repozitorijum)
         {
-            _kontekst = kontekst;
+            _repozitorijum = repozitorijum;
         }
 
         [HttpPost("prijava")]
         public ActionResult Prijava([FromBody] PrijavaDTO dto)
         {
-            var korisnik = _kontekst.Korisnici
-                .FirstOrDefault(k => k.KorisnickoIme == dto.KorisnickoIme);
+            var korisnik = _repozitorijum.DohvatiPoKorisnickomImenu(dto.KorisnickoIme);
 
             if (korisnik == null || !FunkcijeLozinke.ProveriLozinku(
                     dto.Lozinka, korisnik.Salt, korisnik.LozinkaHes))
@@ -32,10 +31,10 @@ namespace SlojServisa.Webservis
         [HttpPost("registracija")]
         public ActionResult Registracija([FromBody] RegistracijaDTO dto)
         {
-            if (_kontekst.Korisnici.Any(k => k.KorisnickoIme == dto.KorisnickoIme))
+            if (_repozitorijum.PostojiKorisnickoIme(dto.KorisnickoIme))
                 return BadRequest("Korisničko ime već postoji.");
 
-            if (_kontekst.Korisnici.Any(k => k.Email == dto.Email))
+            if (_repozitorijum.PostojiEmail(dto.Email))
                 return BadRequest("Email adresa je već u upotrebi.");
 
             var salt = FunkcijeLozinke.GenerisiSalt();
@@ -47,8 +46,7 @@ namespace SlojServisa.Webservis
                 LozinkaHes = FunkcijeLozinke.IzracunajHash(dto.Lozinka, salt)
             };
 
-            _kontekst.Korisnici.Add(korisnik);
-            _kontekst.SaveChanges();
+            _repozitorijum.Dodaj(korisnik);
             return Ok(korisnik.KorisnickoIme);
         }
     }

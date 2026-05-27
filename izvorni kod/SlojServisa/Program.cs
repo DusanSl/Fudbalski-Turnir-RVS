@@ -11,6 +11,7 @@ builder.Services.AddDbContext<TurnirDbContext>(options =>
         .GetConnectionString("PodrazumevanaKonekcija")));
 
 builder.Services.AddScoped<ZapisnikRepozitorijum>();
+builder.Services.AddScoped<KorisnikRepozitorijum>();
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<CitacPravila>();
 builder.Services.AddScoped<SlojPoslovneLogike.Validacija.PoslovnoPraviloValidator>();
