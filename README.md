@@ -58,6 +58,6 @@ Konzistentnost podataka obezbeđena je implementacijom posebnih, sistemskih vali
 
 1. Otvorite Visual Studio rešenje `FudbalskiTurnirRVS.slnx` koje se nalazi u root-u projekta.
 2. Proverite pristup bazi u odgovarajućim podešavanjima konfiguracije (`appsettings.json`).
-3. Pokrenite komandu `Update-Database -Project SlojPodataka -StartupProject PrezentacioniSloj` u Package Manager Console.
+3. Pokrenite komandu `Update-Database -Project SlojPodataka -StartupProject SlojServisa` u Package Manager Console.
 4. Pokrenite .bat skriptu koja se naziva `start-dev.bat` koja se nalazi u root-u projekta.
 5. Pokrenite web browser sa adresom `https://localhost:5001`.
