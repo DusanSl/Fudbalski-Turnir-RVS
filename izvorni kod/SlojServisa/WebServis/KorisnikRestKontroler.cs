@@ -7,11 +7,11 @@ namespace SlojServisa.Webservis
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class KorisnikRestKontroler : ControllerBase
+    public class KorisnikRestController : ControllerBase
     {
         private readonly TurnirDbContext _kontekst;
 
-        public KorisnikRestKontroler(TurnirDbContext kontekst)
+        public KorisnikRestController(TurnirDbContext kontekst)
         {
             _kontekst = kontekst;
         }
@@ -22,13 +22,9 @@ namespace SlojServisa.Webservis
             var korisnik = _kontekst.Korisnici
                 .FirstOrDefault(k => k.KorisnickoIme == dto.KorisnickoIme);
 
-            if (korisnik == null)
-                return Unauthorized($"Korisnik '{dto.KorisnickoIme}' nije pronađen u bazi.");
-
-            var hashProvera = FunkcijeLozinke.IzracunajHash(dto.Lozinka, korisnik.Salt);
-
-            if (hashProvera != korisnik.LozinkaHes)
-                return Unauthorized($"Lozinka ne odgovara. Hash: {hashProvera} | Baza: {korisnik.LozinkaHes}");
+            if (korisnik == null || !FunkcijeLozinke.ProveriLozinku(
+                    dto.Lozinka, korisnik.Salt, korisnik.LozinkaHes))
+                return Unauthorized("Pogrešno korisničko ime ili lozinka.");
 
             return Ok(korisnik.KorisnickoIme);
         }
