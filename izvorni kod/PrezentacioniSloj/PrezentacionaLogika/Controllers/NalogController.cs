@@ -1,89 +1,82 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PrezentacioniSloj.PrezentacionaLogika.ViewModels;
-using SlojPodataka.TehnoloskeKlase;
+using SlojServisa.DTO;
+using System.Text;
+using System.Text.Json;
 
 namespace PrezentacioniSloj.PrezentacionaLogika.Kontroleri
 {
     public class NalogController : Controller
     {
-        private readonly TurnirDbContext _kontekst;
+        private readonly IHttpClientFactory _httpClientFactory;
 
-        public NalogController(TurnirDbContext kontekst)
+        public NalogController(IHttpClientFactory httpClientFactory)
         {
-            _kontekst = kontekst;
+            _httpClientFactory = httpClientFactory;
         }
+
+        private HttpClient KreirajKlijenta() =>
+            _httpClientFactory.CreateClient("FudbalskiApi");
 
         [HttpGet]
-        public IActionResult Registracija()
-        {
-            return View();
-        }
+        public IActionResult Prijava() => View();
 
         [HttpPost]
-        public IActionResult Registracija(RegistracijaViewModel model)
+        public async Task<IActionResult> Prijava(PrijavaViewModel model)
         {
             if (!ModelState.IsValid)
                 return View(model);
 
-            var postojiKorisnik = _kontekst.Korisnici
-                .Any(k => k.KorisnickoIme == model.KorisnickoIme);
-
-            if (postojiKorisnik)
-            {
-                ModelState.AddModelError("", "Korisničko ime već postoji.");
-                return View(model);
-            }
-
-            var postojiEmail = _kontekst.Korisnici
-                .Any(k => k.Email == model.Email);
-
-            if (postojiEmail)
-            {
-                ModelState.AddModelError("", "Email adresa je već u upotrebi.");
-                return View(model);
-            }
-
-            var salt = FunkcijeLozinke.GenerisiSalt();
-
-            var korisnik = new SlojPodataka.KlasePodataka.Korisnik
+            var dto = new PrijavaDTO
             {
                 KorisnickoIme = model.KorisnickoIme,
-                Email = model.Email,
-                Salt = salt,
-                LozinkaHes = FunkcijeLozinke.IzracunajHash(model.Lozinka, salt)
+                Lozinka = model.Lozinka
             };
 
-            _kontekst.Korisnici.Add(korisnik);
-            _kontekst.SaveChanges();
+            var klijent = KreirajKlijenta();
+            var json = JsonSerializer.Serialize(dto);
+            var sadrzaj = new StringContent(json, Encoding.UTF8, "application/json");
+            var odgovor = await klijent.PostAsync("api/KorisnikRest/prijava", sadrzaj);
 
-            HttpContext.Session.SetString("KorisnickoIme", korisnik.KorisnickoIme);
-            return RedirectToAction("Spisak", "Zapisnik");
-        }
-
-        [HttpGet]
-        public IActionResult Prijava()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Prijava(PrijavaViewModel model)
-        {
-            if (!ModelState.IsValid)
-                return View(model);
-
-            var salt = FunkcijeLozinke.GenerisiSalt();
-
-            var korisnik = _kontekst.Korisnici
-                .FirstOrDefault(k => k.KorisnickoIme == model.KorisnickoIme);
-
-            if (korisnik == null || !FunkcijeLozinke.ProveriLozinku(model.Lozinka, korisnik.Salt, korisnik.LozinkaHes))
+            if (!odgovor.IsSuccessStatusCode)
             {
                 ModelState.AddModelError("", "Pogrešno korisničko ime ili lozinka.");
                 return View(model);
             }
 
-            HttpContext.Session.SetString("KorisnickoIme", korisnik.KorisnickoIme);
+            HttpContext.Session.SetString("KorisnickoIme", model.KorisnickoIme);
+            return RedirectToAction("Spisak", "Zapisnik");
+        }
+
+        [HttpGet]
+        public IActionResult Registracija() => View();
+
+        [HttpPost]
+        public async Task<IActionResult> Registracija(RegistracijaViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var dto = new RegistracijaDTO
+            {
+                KorisnickoIme = model.KorisnickoIme,
+                Email = model.Email,
+                Lozinka = model.Lozinka
+            };
+
+            var klijent = KreirajKlijenta();
+            var json = JsonSerializer.Serialize(dto);
+            var sadrzaj = new StringContent(json, Encoding.UTF8, "application/json");
+            var odgovor = await klijent.PostAsync("api/KorisnikRest/registracija", sadrzaj);
+
+            if (!odgovor.IsSuccessStatusCode)
+            {
+                var greska = await odgovor.Content.ReadAsStringAsync();
+                ModelState.AddModelError("", greska);
+                return View(model);
+            }
+
+            HttpContext.Session.SetString("KorisnickoIme", model.KorisnickoIme);
             return RedirectToAction("Spisak", "Zapisnik");
         }
 
