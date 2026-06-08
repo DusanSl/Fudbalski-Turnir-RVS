@@ -4,6 +4,13 @@
     var zapisnici = ViewBag.Zapisnici as List<SlojServisa.DTO.ZapisnikDTO> ?? new List<SlojServisa.DTO.ZapisnikDTO>();
 }
 
+@if (ViewBag.UkupnoZapisnika != null)
+{
+    <div class="alert alert-info">
+        Ukupan broj zapisnika u bazi (stored procedura): <strong>@ViewBag.UkupnoZapisnika</strong>
+    </div>
+}
+
 <h2 class="mb-4">Spisak zapisnika</h2>
 
 <form asp-action="Spisak" method="get" class="mb-4">

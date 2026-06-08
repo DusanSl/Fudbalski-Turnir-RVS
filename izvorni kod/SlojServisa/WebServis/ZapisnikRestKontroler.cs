@@ -33,6 +33,13 @@ namespace SlojServisa.Webservis
             return Ok(_mapper.UListuDTO(zapisnici));
         }
 
+        [HttpGet("statistika")]
+        public ActionResult<int> DohvatiStatistiku()
+        {
+            int ukupno = _repozitorijum.DohvatiUkupanBrojZapisnikaPrekoSP();
+            return Ok(ukupno);
+        }
+
         [HttpGet("{id}")]
         public ActionResult<ZapisnikDTO> DohvatiPoId(int id)
         {

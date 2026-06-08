@@ -12,11 +12,21 @@ namespace SlojServisa.Webservis
     {
         private readonly ZapisnikRepozitorijum _repozitorijum;
         private readonly KlubMapper _mapper;
+        private readonly KlubRepoDBUtils _dbUtils;
 
-        public KluboviRestController(ZapisnikRepozitorijum repozitorijum)
+        public KluboviRestController(ZapisnikRepozitorijum repozitorijum, KlubRepoDBUtils dbUtils)
         {
             _repozitorijum = repozitorijum;
             _mapper = new KlubMapper();
+            _dbUtils = dbUtils;
+        }
+
+
+        [HttpGet("broj")]
+        public ActionResult<int> DohvatiBrojKlubova()
+        {
+            int broj = _dbUtils.IzbrojKlubove();
+            return Ok(broj);
         }
 
         [HttpGet]
