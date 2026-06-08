@@ -10,11 +10,14 @@ builder.Services.AddDbContext<TurnirDbContext>(options =>
     options.UseSqlServer(builder.Configuration
         .GetConnectionString("PodrazumevanaKonekcija")));
 
+Konekcija.NizKonekcije = builder.Configuration.GetConnectionString("PodrazumevanaKonekcija")!;
+
 builder.Services.AddScoped<ZapisnikRepozitorijum>();
 builder.Services.AddScoped<KorisnikRepozitorijum>();
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<CitacPravila>();
 builder.Services.AddScoped<SlojPoslovneLogike.Validacija.PoslovnoPraviloValidator>();
+builder.Services.AddScoped<KlubRepoDBUtils>();
 
 var app = builder.Build();
 

@@ -48,6 +48,14 @@ namespace PrezentacioniSloj.PrezentacionaLogika.Kontroleri
                 return RedirectToAction("Prijava", "Nalog");
 
             var klijent = KreirajKlijenta();
+
+            var statOdgovor = await klijent.GetAsync("api/ZapisnikRest/statistika");
+            if (statOdgovor.IsSuccessStatusCode)
+            {
+                var statJson = await statOdgovor.Content.ReadAsStringAsync();
+                ViewBag.UkupnoZapisnika = int.Parse(statJson);
+            }
+
             var url = $"api/ZapisnikRest/filter?";
 
             if (filter.DatumOd.HasValue)
@@ -76,6 +84,14 @@ namespace PrezentacioniSloj.PrezentacionaLogika.Kontroleri
             if (HttpContext.Session.GetString("KorisnickoIme") == null)
                 return RedirectToAction("Prijava", "Nalog");
 
+            var klijent = KreirajKlijenta();
+            var brojOdgovor = await klijent.GetAsync("api/KluboviRest/broj");
+            if (brojOdgovor.IsSuccessStatusCode)
+            {
+                var brojJson = await brojOdgovor.Content.ReadAsStringAsync();
+                ViewBag.BrojKlubova = int.Parse(brojJson);
+            }
+
             var klubovi = await DohvatiKlubove();
             var model = new ZapisnikViewModel
             {
@@ -83,6 +99,14 @@ namespace PrezentacioniSloj.PrezentacionaLogika.Kontroleri
                 Klubovi = KreirajDropdown(klubovi),
                 Stavke = new List<StavkaZapisnikaViewModel>()
             };
+
+            var naziviOdgovor = await klijent.GetAsync("api/KluboviRest/nazivi");
+            if (naziviOdgovor.IsSuccessStatusCode)
+            {
+                var naziviJson = await naziviOdgovor.Content.ReadAsStringAsync();
+                ViewBag.NaziviKlubova = JsonSerializer.Deserialize<List<string>>(naziviJson,
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            }
             return View(model);
         }
 
