@@ -35,5 +35,12 @@ namespace SlojServisa.Webservis
             var klubovi = _repozitorijum.DohvatiKlubove();
             return Ok(_mapper.UListuDTO(klubovi));
         }
+
+        [HttpGet("nazivi")]
+        public ActionResult<List<string>> DohvatiNazive()
+        {
+            var nazivi = _dbUtils.DohvatiNaziveKlubova();
+            return Ok(nazivi);
+        }
     }
 }

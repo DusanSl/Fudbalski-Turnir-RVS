@@ -99,6 +99,14 @@ namespace PrezentacioniSloj.PrezentacionaLogika.Kontroleri
                 Klubovi = KreirajDropdown(klubovi),
                 Stavke = new List<StavkaZapisnikaViewModel>()
             };
+
+            var naziviOdgovor = await klijent.GetAsync("api/KluboviRest/nazivi");
+            if (naziviOdgovor.IsSuccessStatusCode)
+            {
+                var naziviJson = await naziviOdgovor.Content.ReadAsStringAsync();
+                ViewBag.NaziviKlubova = JsonSerializer.Deserialize<List<string>>(naziviJson,
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            }
             return View(model);
         }
 
